@@ -1,0 +1,26 @@
+---
+const nav = [
+  ['/menus/', 'Eat & Drink'], ['/#stay', 'Stay'], ['/#story', 'Our Story'], ['/#whats-on', "What's On"], ['/#find', 'Find Us'],
+];
+---
+<header class="site-header" data-header>
+  <div class="wrap site-header__bar">
+    <a class="brand" href="/">
+      <span class="brand__the">The</span> <span class="brand__name">Horse</span> <span class="brand__place">Shepshed</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main" data-nav>
+      <ul>{nav.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+    </nav>
+    <a class="btn btn--brass btn--sm" href="/book/">Book a Table</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-toggle><span class="sr-only">Menu</span><i></i><i></i></button>
+  </div>
+</header>
+<script>
+  const h = document.querySelector('[data-header]')!;
+  const t = h.querySelector<HTMLButtonElement>('[data-toggle]')!;
+  t.addEventListener('click', () => { const o = t.getAttribute('aria-expanded') !== 'true'; t.setAttribute('aria-expanded', String(o)); h.classList.toggle('is-open', o); });
+  h.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => { t.setAttribute('aria-expanded', 'false'); h.classList.remove('is-open'); }));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && h.classList.contains('is-open')) { t.click(); t.focus(); } });
+  const onScroll = () => h.classList.toggle('is-solid', scrollY > 24);
+  onScroll(); addEventListener('scroll', onScroll, { passive: true });
+</script>

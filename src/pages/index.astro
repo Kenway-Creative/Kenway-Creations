@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('The Horse, 196 Ashby Road West, Shepshed, LE12 9EF');
+const parties = [1, 2, 3, 4, 5, 6, 7, 8];
+---
+<Base title="The Horse, Shepshed – unofficial design concept" description="Unofficial design concept for The Horse: a welcoming pub and restaurant in Shepshed, Leicestershire.">
+  <!-- COPY: approved prototype suggestions, pending owner review (see docs/content-register.md). Sections without approved copy carry neutral temporary wording. -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Shepshed · Leicestershire</p>
+        <h1 id="h1"><span>Good food.</span> <span>Good company.</span> <em>Right at home.</em></h1>
+        <p class="lede hero__lede">A welcoming pub and restaurant in Shepshed, serving thoughtfully prepared food, good drinks and the sort of hospitality that makes you want to come back.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--brass" href="/book/">Book a Table</a>
+          <a class="btn btn--ghost" href="/menus/">Explore Our Menus</a>
+        </div>
+      </div>
+      <form class="quick" action="/book/" method="get" aria-labelledby="quick-h">
+        <h2 id="quick-h" class="quick__title">Find a table</h2>
+        <div class="quick__row">
+          <label>Guests
+            <select name="party">{parties.map(n => <option value={n} selected={n === 2}>{n}</option>)}</select>
+          </label>
+          <label>Date <input type="date" name="date" data-today-min required /></label>
+        </div>
+        <button class="btn btn--forest" type="submit">Find a Table</button>
+        <p class="quick__note">Sample availability only. Prefer to call? <a href="tel:+441509507006">01509 507006</a></p>
+      </form>
+    </div>
+    <Photo class="hero__photo" asset="hero.jpg" priority label="Hero – exterior or dining room" tone="forest" ratio="21 / 9" />
+  </section>
+
+  <div class="strip-wrap">
+    <ul class="wrap strip" aria-label="At a glance">
+      <li>Independent freehouse</li><li>Restaurant &amp; bar</li><li>Wood-fired pizza</li><li>Six bedrooms</li>
+    </ul>
+  </div>
+
+  <section id="eat" class="on-clay" aria-labelledby="eat-h">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Eat &amp; drink</p>
+        <h2 id="eat-h">Food worth <em>coming back for.</em></h2>
+        <p class="lede">From a relaxed midweek supper to something worth celebrating, enjoy carefully prepared dishes in surroundings that feel comfortably familiar. Quality is always at the heart of the kitchen, without the fuss.</p>
+        <div class="hero__ctas"><a class="btn btn--forest" href="/book/">Book a Table</a><a class="btn btn--ghost" href="/menus/">Explore Our Menus</a></div>
+      </div>
+      <div class="cards">
+        <a class="card reveal" href="/menus/#main-menu"><Photo label="Main menu dish" tone="forest" ratio="4 / 5" /><h3>Lunch &amp; evening</h3><p>Relaxed suppers and meals worth celebrating.</p><span class="link-arrow">View the menu</span></a>
+        <a class="card reveal" href="/menus/#sunday-lunch"><Photo label="Sunday lunch" tone="clay" ratio="4 / 5" /><h3>Sunday lunch</h3><p>Gather around the table.</p><span class="link-arrow">View the menu</span></a>
+        <a class="card reveal" href="#find"><Photo label="The Stables pizza oven" tone="brass" ratio="4 / 5" /><h3>The Stables</h3><p>Wood-fired pizza.</p><span class="link-arrow">Find us</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="atmos-h">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">The pub</p>
+        <h2 id="atmos-h">Pull up <em>a chair.</em></h2>
+        <p class="lede">A proper pub should feel like somewhere you belong. Whether you're meeting friends for a drink, enjoying a date night or gathering around the table, there's always a reason to visit.</p>
+      </div>
+      <div class="mosaic">
+        <Photo class="reveal" label="Dining room" tone="forest" ratio="4 / 5" />
+        <Photo class="reveal" label="The bar" tone="clay" ratio="4 / 3" />
+        <Photo class="reveal" label="Courtyard" tone="brass" ratio="4 / 3" />
+      </div>
+    </div>
+  </section>
+
+  <section id="stay" class="on-dark" aria-labelledby="stay-h">
+    <div class="wrap split">
+      <div class="reveal">
+        <p class="eyebrow">Stay</p>
+        <h2 id="stay-h">Stay <em>a little longer.</em></h2>
+        <p class="lede">Make yourself at home in The Barn Courtyard, with six guest bedrooms conveniently located for East Midlands Airport, Donington Park and the surrounding area.</p>
+        <ul class="facts">
+          <li><b>Premium King</b><span>2 rooms</span></li>
+          <li><b>Double</b><span>4 rooms</span></li>
+          <li><b>Rates &amp; availability</b><span>On enquiry</span></li>
+        </ul>
+        <div class="actions"><a class="btn btn--ghost" href="#find">Enquire About a Room</a></div>
+      </div>
+      <div class="stack reveal">
+        <Photo label="Premium King bedroom" tone="clay" ratio="16 / 10" />
+        <Photo label="Double bedroom" tone="brass" ratio="1 / 1" />
+        <Photo label="The Barn Courtyard" tone="ivory" ratio="1 / 1" />
+      </div>
+    </div>
+  </section>
+
+  <section id="story" aria-labelledby="story-h">
+    <div class="wrap split">
+      <Photo class="reveal" label="Kitchen or team" tone="forest" ratio="1 / 1" />
+      <div class="reveal">
+        <p class="eyebrow">Our story</p>
+        <h2 id="story-h">The people behind <em>The Horse.</em></h2>
+        <p>A little about the pub, the team and the food.</p>
+        <a class="link-arrow" href="#find">Come and see for yourself</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="whats-on" class="on-clay" aria-labelledby="on-h">
+    <div class="wrap split">
+      <div class="reveal">
+        <p class="eyebrow">What's on</p>
+        <h2 id="on-h">Events &amp; <em>special occasions.</em></h2>
+        <p>Find out what's coming up at The Horse.</p>
+      </div>
+      <Photo class="reveal" label="Events" tone="ivory" ratio="3 / 2" />
+    </div>
+  </section>
+
+  <section id="find" aria-labelledby="find-h">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Find us</p>
+        <h2 id="find-h">Ashby Road West, <em>Shepshed.</em></h2>
+      </div>
+      <div class="find reveal">
+        <div><h3>Address</h3><address>The Horse<br />196 Ashby Road West<br />Shepshed<br />LE12 9EF</address></div>
+        <div><h3>Opening times &amp; bookings</h3><p>Please call us on <a href="tel:+441509507006">01509 507006</a> to check opening times or to ask about a room.</p></div>
+      </div>
+      <div class="actions"><a class="btn btn--forest" href={mapUrl} rel="noopener">Get Directions</a><a class="btn btn--ghost" href="tel:+441509507006">Call Us</a></div>
+    </div>
+  </section>
+
+  <section class="on-dark closing" aria-labelledby="close-h">
+    <div class="wrap reveal">
+      <h2 id="close-h">Come hungry. <em>Leave happy.</em></h2>
+      <p class="lede">Explore the menus, discover what's on, or find a table for your next visit.</p>
+      <div class="actions"><a class="btn btn--brass" href="/book/">Book a Table</a><a class="btn btn--ghost" href="/menus/">Explore Our Menus</a></div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Date picker can't select the past.
+  const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  document.querySelectorAll<HTMLInputElement>('[data-today-min]').forEach(i => { i.min = today.toISOString().slice(0, 10); i.value ||= i.min; });
+</script>

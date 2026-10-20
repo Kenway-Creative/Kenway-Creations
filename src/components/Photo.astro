@@ -1,0 +1,15 @@
+---
+// Real venue photo if src/assets/venue/<asset> exists, otherwise a designed placeholder. Never stock or AI imagery.
+import { Image } from 'astro:assets';
+const { label, ratio = '4 / 3', tone = 'forest', class: cls = '', asset, alt = label, priority = false, sizes = '(min-width: 72rem) 50vw, 100vw' } = Astro.props;
+const files = import.meta.glob('../assets/venue/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' });
+const img = asset ? files[`../assets/venue/${asset}`] : undefined;
+---
+<figure class={`ph ph--${tone} ${img ? 'ph--real' : ''} ${cls}`} style={`aspect-ratio:${ratio}`}>
+  {img
+    ? <Image src={img} alt={alt} class="ph__img" widths={[480, 800, 1200, 1800, 2400]} sizes={sizes} loading={priority ? 'eager' : 'lazy'} />
+    : <>
+        <svg class="ph__mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38h32M12 38V22l12-10 12 10v16M20 38V28h8v10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <figcaption><span>Photo pending</span>{label}</figcaption>
+      </>}
+</figure>

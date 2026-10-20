@@ -1,0 +1,165 @@
+---
+import Base from '../layouts/Base.astro';
+import ToastWidget from '../components/ToastWidget.astro';
+const toast = import.meta.env.PUBLIC_TOAST_BOOKING_URL || '';
+const parties = [1, 2, 3, 4, 5, 6, 7, 8];
+---
+<Base title="Book a Table – The Horse, Shepshed (demonstration)" description="Demonstration of the table booking journey.">
+  <div class="book wrap">
+    <div class="demo-banner" role="note">
+      <strong>Demonstration – no booking is made.</strong>
+      Availability below is fictional and nothing is sent, stored or confirmed. In the live site, this step is replaced by the restaurant's real Toast Tables booking widget.
+    </div>
+
+    <div class="book__grid">
+      <div>
+        <h1 class="eyebrow">Book a Table</h1>
+        <ol class="steps" aria-label="Progress" data-steps>
+          <li aria-current="step">Guests &amp; date</li><li>Time</li><li>Your details</li><li>Done</li>
+        </ol>
+
+        <form data-form novalidate>
+          <section class="panel" data-panel="1" aria-labelledby="p1">
+            <h2 id="p1" tabindex="-1">Who's coming, and when?</h2>
+            <fieldset>
+              <legend>Number of guests</legend>
+              <div class="chips">
+                {parties.map(n => <label class="chip"><input type="radio" name="party" value={n} checked={n === 2} /><span>{n}</span></label>)}
+              </div>
+              <p class="hint">Parties of 9 or more: please phone <a href="tel:+441509507006">01509 507006</a> <span class="pending">number to be verified</span></p>
+            </fieldset>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required aria-describedby="date-err" />
+              <span id="date-err" class="err" role="alert"></span>
+            </div>
+            <button class="btn btn--forest" type="button" data-next="2">See times</button>
+          </section>
+
+          <section class="panel" data-panel="2" aria-labelledby="p2" hidden>
+            <h2 id="p2" tabindex="-1">Choose a time</h2>
+            <p class="hint slot-help">Fictional demonstration times – not the restaurant's real service times. Struck-through times are shown as unavailable.</p>
+            <div class="slots" data-slots></div>
+            <span class="err" role="alert" data-slot-err></span>
+            <div class="row"><button class="btn btn--ghost" type="button" data-back="1" style="color:var(--forest)">Back</button><button class="btn btn--forest" type="button" data-next="3">Continue</button></div>
+          </section>
+
+          <section class="panel" data-panel="3" aria-labelledby="p3" hidden>
+            <h2 id="p3" tabindex="-1">Your details</h2>
+            <p class="hint">Use made-up details – this form does not send or save anything.</p>
+            <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" required /></div>
+            <div class="field"><label for="notes">Anything we should know? <span class="hint">(optional)</span></label><textarea id="notes" name="notes"></textarea>
+              <span class="hint">Please contact the restaurant directly about allergies – this demo does not capture or verify allergen information.</span></div>
+            <span class="err" role="alert" data-detail-err></span>
+            <div class="row"><button class="btn btn--ghost" type="button" data-back="2" style="color:var(--forest)">Back</button><button class="btn btn--forest" type="submit">Complete demo booking</button></div>
+          </section>
+
+          <section class="panel" data-panel="4" aria-labelledby="p4" hidden>
+            <div class="confirm">
+              <span class="confirm__stamp">Demonstration – nothing has been booked</span>
+              <h2 id="p4" tabindex="-1">Thanks, <span data-out="name"></span>.</h2>
+              <p class="lede">This is how the confirmation would look: <strong data-out="summary"></strong>.</p>
+              <h3>Changing your plans</h3>
+              <p>In production, Toast sends the confirmation and handles changes. Whether guests get manage / cancel links, and any notice period or deposit rules, depends on the venue's Toast Tables settings – to be confirmed.</p>
+              <div class="row">
+                {toast
+                  ? <a class="btn btn--brass" href={toast} rel="noopener">Continue to the real booking (Toast)</a>
+                  : <span class="pending">Toast booking link not set yet – see .env.example</span>}
+                <button class="btn btn--ghost" type="button" data-restart style="color:var(--forest)">Start again</button>
+              </div>
+            </div>
+          </section>
+        </form>
+        <p class="sr-only" aria-live="polite" data-live></p>
+        <ToastWidget />
+      </div>
+
+      <aside class="aside" aria-label="Your booking so far">
+        <h2>Your table</h2>
+        <dl><dt>Guests</dt><dd data-sum="party">–</dd><dt>Date</dt><dd data-sum="date">–</dd><dt>Time</dt><dd data-sum="time">–</dd></dl>
+        <p>The Horse, 196 Ashby Road West, Shepshed</p>
+        <p class="hint" style="color:var(--ivory);opacity:.7">Prototype summary only.</p>
+      </aside>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { demoSlots } from '../lib/demo-slots.js';
+  const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
+  const form = $<HTMLFormElement>('[data-form]');
+  const date = $<HTMLInputElement>('#date');
+  const steps = [...document.querySelectorAll('[data-steps] li')];
+  const st = { step: 1, time: '' };
+  const party = () => +(form.querySelector<HTMLInputElement>('[name=party]:checked')?.value ?? 2);
+  const nice = (d: string) => new Date(d + 'T12:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  date.min = today.toISOString().slice(0, 10);
+  const q = new URLSearchParams(location.search);
+  date.value = q.get('date') && q.get('date')! >= date.min ? q.get('date')! : date.min;
+  const p = form.querySelector<HTMLInputElement>(`[name=party][value="${q.get('party')}"]`); if (p) p.checked = true;
+
+  function summary() {
+    $('[data-sum=party]').textContent = String(party());
+    $('[data-sum=date]').textContent = date.value ? nice(date.value) : '–';
+    $('[data-sum=time]').textContent = st.time || '–';
+  }
+  function go(n: number) {
+    st.step = n;
+    form.querySelectorAll<HTMLElement>('[data-panel]').forEach(s => s.hidden = +s.dataset.panel! !== n);
+    steps.forEach((li, i) => { li.classList.toggle('done', i + 1 < n); i + 1 === n ? li.setAttribute('aria-current', 'step') : li.removeAttribute('aria-current'); });
+    const h = $<HTMLElement>(`#p${n}`); h.focus(); $('[data-live]').textContent = `Step ${n} of 4: ${h.textContent}`;
+    summary();
+  }
+  function renderSlots() {
+    const sessions = demoSlots(date.value, party());
+    const box = $('[data-slots]');
+    box.replaceChildren();
+    const any = sessions.some(s => s.slots.some(x => x.available));
+    if (!any) { box.innerHTML = '<p><strong>No fictional tables left that day.</strong> Go back and try another date.</p>'; return; }
+    for (const s of sessions) {
+      if (!s.slots.length) continue;
+      const fs = document.createElement('fieldset'); fs.className = 'slots';
+      fs.innerHTML = `<legend><h3>${s.label}</h3></legend><div class="chips"></div>`;
+      for (const { time, available } of s.slots) {
+        const l = document.createElement('label'); l.className = 'chip';
+        l.innerHTML = `<input type="radio" name="time" value="${time}" ${available ? '' : 'disabled'} ${time === st.time && available ? 'checked' : ''}><span>${time}</span>`;
+        fs.querySelector('.chips')!.append(l);
+      }
+      box.append(fs);
+    }
+  }
+  form.addEventListener('change', e => {
+    const t = e.target as HTMLInputElement;
+    if (t.name === 'time') st.time = t.value; else if (t.name === 'party' || t.id === 'date') st.time = '';
+    summary();
+  });
+  form.addEventListener('click', e => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>('button'); if (!b) return;
+    if (b.dataset.back) go(+b.dataset.back);
+    if (b.dataset.restart !== undefined) { st.time = ''; form.reset(); date.value = date.min; go(1); }
+    if (b.dataset.next === '2') {
+      const bad = !date.value || date.value < date.min;
+      $('#date-err').textContent = bad ? 'Please choose today or a future date.' : '';
+      if (bad) return date.focus();
+      renderSlots(); go(2);
+    }
+    if (b.dataset.next === '3') {
+      if (!st.time) { $('[data-slot-err]').textContent = 'Please choose a time.'; return; }
+      $('[data-slot-err]').textContent = ''; go(3);
+    }
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const bad = ['name', 'email', 'phone'].find(n => !(form.elements.namedItem(n) as HTMLInputElement).checkValidity() || !(form.elements.namedItem(n) as HTMLInputElement).value.trim());
+    $('[data-detail-err]').textContent = bad ? `Please check your ${bad === 'phone' ? 'mobile number' : bad}.` : '';
+    if (bad) return (form.elements.namedItem(bad) as HTMLElement).focus();
+    $('[data-out=name]').textContent = (form.elements.namedItem('name') as HTMLInputElement).value.split(' ')[0];
+    $('[data-out=summary]').textContent = `${party()} ${party() === 1 ? 'guest' : 'guests'}, ${nice(date.value)} at ${st.time}`;
+    go(4);
+  });
+  summary();
+</script>

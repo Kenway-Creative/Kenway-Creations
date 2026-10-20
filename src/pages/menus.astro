@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+// Official PDF locations supplied by the project owner (GPT-verified public URLs). Linked, never copied or modified.
+const menus = [
+  { id: 'main-menu', title: 'Main Menu', url: 'https://www.thehorseshepshed.co.uk/wp-content/uploads/2025/10/2025-MAIN-MENU.pdf' },
+  { id: 'sunday-lunch', title: 'Sunday Lunch Menu', url: 'https://www.thehorseshepshed.co.uk/wp-content/uploads/2025/10/2025-Sunday-Lunch-Menu.pdf' },
+];
+---
+<Base title="Our menus – The Horse, Shepshed (unofficial concept)" description="The Horse's current menus, followed by a table booking.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Eat &amp; drink</p>
+      <h1>Our <em>menus.</em></h1>
+      <p class="lede">Take a look at what's on offer, then find a table for your next visit.</p>
+      <p class="hint">These are the restaurant's own published menus. Dishes and prices are subject to the restaurant's confirmation.</p>
+    </div>
+  </section>
+
+  <section aria-label="Menus">
+    <div class="wrap">
+      <ul class="menu-list">
+        {menus.map(m => (
+          <li class="menu-item" id={m.id}>
+            <div>
+              <h2>{m.title}</h2>
+              <p>PDF, opens the restaurant's website in a new tab.</p>
+            </div>
+            <a class="btn btn--forest" href={m.url} target="_blank" rel="noopener">View the {m.title}<span class="sr-only"> (PDF, opens in a new tab)</span></a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="on-dark closing" aria-labelledby="menus-cta">
+    <div class="wrap">
+      <h2 id="menus-cta">Ready to <em>book?</em></h2>
+      <p class="lede">Choose a date and time to find a table.</p>
+      <div class="actions"><a class="btn btn--brass" href="/book/">Book a Table</a></div>
+    </div>
+  </section>
+</Base>
