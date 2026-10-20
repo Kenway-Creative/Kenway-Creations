@@ -7,7 +7,7 @@ Independent, unofficial proof of concept. Not a commissioned website. **Nothing 
 | Item | State | Evidence |
 |---|---|---|
 | Repository `Kenway-Creative/Kenway-Creations` visibility | **UNVERIFIED** (last known public: treat as public) | Could not be checked, see blocker |
-| Active GitHub account / push permission | **UNVERIFIED** | `gh auth status`: `GH_TOKEN` is invalid; `add_repo` (push) refused: "you need push access to kenway-creative/kenway-creations" |
+| Active GitHub account / push permission | **UNVERIFIED** (re-checked after the owner's changes; same result) | `gh auth status`: `GH_TOKEN` is invalid; `add_repo` (push) refused twice: "you need push access to kenway-creative/kenway-creations". No device-login workaround was attempted |
 | Push to GitHub | **NOT DONE (deliberately)**: no push until privacy is confirmed | – |
 | Local audit, tests, production build | Done (see "Local audit") | commands below |
 | Local commit on `main` | Prepared locally only (no remote configured) | `git log` |
@@ -103,10 +103,25 @@ As an authorised user: homepage loads; `/book/` works; `/menus/` links; fonts re
 
 ## Development workflow (Phase F)
 
-- `main` is the baseline: no direct pushes once the repository exists; changes arrive by short-lived `feature/<topic>` branches and pull requests when practical (one small PR per design task, V2, V3…). Enable branch protection or a ruleset on `main` (require PR, block force-push and deletion) **if the GitHub plan supports it for private repositories**; otherwise follow the convention.
-- Preview builds for feature branches only after step 9, with the wildcard Access application verified.
-- Repeatable release: PR merged to `main` → Cloudflare builds `main` → protection tests re-run only if hostnames or Access settings changed.
-- No other bureaucracy (no CI pipeline) until needed; `npm test` and `npm run build` are the gates before a PR.
+**Simplified (owner instruction, 20 Oct 2026): GitHub is for internal proof-of-concept development and review only. This is not a production deployment or client handover.**
+
+1. Claude changes the project locally and tests it (`npm test`, `npm run build`, browser checks).
+2. Claude commits each completed iteration and pushes it straight to `main` (private repository, force-push never). No pull requests, branch protection or CI are needed for this internal prototype. A short-lived `feature/<topic>` branch is optional for risky experiments.
+3. The owner reviews progress on GitHub and, if one is set up, the protected preview.
+4. GPT gives content and design feedback; Claude implements the revisions.
+
+Rules that stay: push only after the repository is verified private; no preview deployment of the full site until Access is verified on the main `pages.dev` hostname and all preview hostnames; no extra repositories or hosting services without approval; no Toast integration, payments, production infrastructure or custom domain.
+
+### Preview options, simplest first
+
+| Option | Effort | Protection | Notes |
+|---|---|---|---|
+| **A. Screenshots and screen recordings in the review chat** | None | Nothing is hosted | What is being used now. Enough for visual review; not interactive |
+| **B. Cloudflare Pages + Access** (the preferred target) | One-off dashboard setup: Cloudflare account, GitHub app for one repository, the holding-branch sequence above, Access on both hostnames, tests | Email one-time PIN limited to named reviewers | Free plan is expected to cover it (verify current limits). Moderate, not heavy: the steps are listed above. Access must be verified before the first real deployment |
+| **C. Reviewers run it locally** | `git clone`, `npm ci`, `npm run dev` | Private repository access | Needs Node ≥ 22.22 and a technical reviewer |
+| D. Other hosts with password protection | Low | Shared password | Usually a paid feature: **not without approval** |
+
+Recommendation: continue with A now; set up B once GitHub access is fixed and the owner supplies reviewer emails.
 
 ## Manual actions needed from the owner
 
