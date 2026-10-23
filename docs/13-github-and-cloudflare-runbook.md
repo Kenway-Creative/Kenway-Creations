@@ -6,14 +6,14 @@ Independent, unofficial proof of concept. Not a commissioned website. **Nothing 
 
 | Item | State | Evidence |
 |---|---|---|
-| Repository `Kenway-Creative/Kenway-Creations` visibility | **UNVERIFIED** (last known public: treat as public) | Could not be checked, see blocker |
-| Active GitHub account / push permission | **UNVERIFIED** (re-checked after the owner's changes; same result) | `gh auth status`: `GH_TOKEN` is invalid; `add_repo` (push) refused twice: "you need push access to kenway-creative/kenway-creations". No device-login workaround was attempted |
-| Push to GitHub | **NOT DONE (deliberately)**: no push until privacy is confirmed | – |
+| Repository `Kenway-Creative/Kenway-Creations` visibility | **VERIFIED PRIVATE** (23 Oct 2026) | GitHub API: `private: true`, `visibility: private`; an unauthenticated request to the repository's web page returns 404. Owner `Kenway-Creative` (a personal **user** account, not an organisation). Default branch `main`. Remote is empty (size 0) |
+| Active GitHub account / push permission | **VERIFIED via the session's GitHub connection** (23 Oct 2026) | `add_repo` (push) succeeded; the API reports `permissions: push, admin, maintain = true`. The `gh` CLI's own `GH_TOKEN` is still invalid and is not used |
+| Push to GitHub | **NOT DONE: the first push was blocked by the tool-permission layer** ("out-of-place publication"), although privacy and push rights are now verified. Waiting for the owner to allow it | – |
 | Local audit, tests, production build | Done (see "Local audit") | commands below |
 | Local commit on `main` | Prepared locally only (no remote configured) | `git log` |
 | Cloudflare project / Access | **Not created.** No Cloudflare access from this environment | – |
 
-### Blocker: GitHub access (owner actions)
+### GitHub access (resolved 23 Oct 2026; steps kept for reference). Note: the owner is a personal user account, so "organisation" below means that account
 
 1. Connect or reconnect GitHub for the account that should push, at <https://claude.ai/connect-github>. That account must have **write access** to `Kenway-Creative/Kenway-Creations`.
 2. Make sure the **Claude GitHub App is installed on the `Kenway-Creative` organisation** with this repository selected (an organisation owner can do this from the same page).
@@ -125,7 +125,7 @@ Recommendation: continue with A now; set up B once GitHub access is fixed and th
 
 ## Manual actions needed from the owner
 
-1. Fix GitHub access (connect, App on the org, repository selected) and confirm the repository is **Private**.
+1. ~~Fix GitHub access and make the repository Private~~ (done and verified). **Allow the first `git push` of `main`** (and, for the Cloudflare route, `holding`), which the permission layer blocked.
 2. Create/own the Cloudflare account; authorise the Cloudflare GitHub app for the one repository.
 3. Supply the **email addresses** allowed through Access.
 4. Run or approve the protection tests, and confirm the Node version is supported by the Pages build image.
