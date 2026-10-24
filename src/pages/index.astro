@@ -18,7 +18,8 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
           <a class="btn btn--ghost" href="/menus/">Explore Our Menus</a>
         </div>
       </div>
-      <form class="quick" action="/book/" method="get" aria-labelledby="quick-h">
+    </div>
+      <form class="wrap quick quick--bar" action="/book/" method="get" aria-labelledby="quick-h">
         <h2 id="quick-h" class="quick__title">Find a table</h2>
         <div class="quick__row">
           <label>Guests
@@ -29,7 +30,6 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
         <button class="btn btn--forest" type="submit">Find a Table</button>
         <p class="quick__note">Sample availability only. Prefer to call? <a href="tel:+441509507006">01509 507006</a></p>
       </form>
-    </div>
     <Photo class="hero__photo" asset="hero.jpg" priority label="Hero – exterior or dining room" tone="forest" ratio="21 / 9" />
   </section>
 
@@ -41,11 +41,15 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
 
   <section id="eat" class="on-clay" aria-labelledby="eat-h">
     <div class="wrap">
-      <div class="reveal">
+      <div class="sec-head reveal">
+       <div>
         <p class="eyebrow">Eat &amp; drink</p>
         <h2 id="eat-h">Food worth <em>coming back for.</em></h2>
+       </div>
+       <div>
         <p class="lede">From a relaxed midweek supper to something worth celebrating, enjoy carefully prepared dishes in surroundings that feel comfortably familiar. Quality is always at the heart of the kitchen, without the fuss.</p>
         <div class="hero__ctas"><a class="btn btn--forest" href="/book/">Book a Table</a><a class="btn btn--ghost" href="/menus/">Explore Our Menus</a></div>
+       </div>
       </div>
       <div class="cards">
         <a class="card reveal" href="/menus/#main-menu"><Photo label="Main menu dish" tone="forest" ratio="4 / 5" /><h3>Lunch &amp; evening</h3><p>Relaxed suppers and meals worth celebrating.</p><span class="link-arrow">View the menu</span></a>
@@ -57,10 +61,14 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
 
   <section aria-labelledby="atmos-h">
     <div class="wrap">
-      <div class="reveal">
+      <div class="sec-head reveal">
+       <div>
         <p class="eyebrow">The pub</p>
         <h2 id="atmos-h">Pull up <em>a chair.</em></h2>
+       </div>
+       <div>
         <p class="lede">A proper pub should feel like somewhere you belong. Whether you're meeting friends for a drink, enjoying a date night or gathering around the table, there's always a reason to visit.</p>
+       </div>
       </div>
       <div class="mosaic">
         <Photo class="reveal" label="Dining room" tone="forest" ratio="4 / 5" />

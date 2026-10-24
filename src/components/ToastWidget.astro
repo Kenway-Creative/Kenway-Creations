@@ -7,5 +7,4 @@ const snippet = ''; // shortcut: empty until the venue's Toast Tables widget sni
 ---
 {snippet
   ? <div data-toast-widget><Fragment set:html={snippet} /></div>
-  : <div class="widget-slot" role="note"><h3>Toast booking widget – not connected</h3>
-      <p>In production, Toast's own reservation widget sits here (opening a booking window on top of this page), so guests book real availability without leaving the site. The venue's snippet is needed first.</p></div>}
+  : <p class="widget-note" role="note">Demonstration only. The live site uses the venue's own Toast Tables booking widget here.</p>}

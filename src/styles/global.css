@@ -256,3 +256,69 @@ address { font-style: normal; }
 .btn--ghost-dark { color: var(--forest); }
 .btn--ghost-dark:hover { background: rgb(37 58 46 / .08); }
 .h3 { font-family: var(--ff-serif); font-weight: 400; font-size: 1.2rem; margin: 0 0 var(--space-2); }
+
+/* ===== Editorial redesign pass ===== */
+/* 1. Header: light, hairline, small-caps navigation */
+.site-header { background: var(--ivory); color: var(--forest); border-bottom: 1px solid #d8ccb4; }
+.site-header.is-solid { box-shadow: none; }
+.site-header .brand__name { color: var(--forest); }
+.site-header .brand__the, .site-header .brand__place { color: var(--clay); }
+.site-header .nav a { font-size: var(--step-label); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; background-image: linear-gradient(var(--clay), var(--clay)); }
+.site-header .btn--brass { background: var(--forest); color: var(--ivory); }
+.site-header .btn--brass:hover { background: var(--forest-2); }
+.site-header :focus-visible { outline-color: var(--forest); }
+@media (max-width: 52rem) {
+  .site-header .nav { background: var(--ivory); border-bottom: 1px solid #d8ccb4; }
+  .site-header .nav a { font-family: var(--ff-serif); font-size: 1.4rem; text-transform: none; letter-spacing: 0; border-bottom-color: #d8ccb4; }
+}
+
+/* 2. Hero: larger headline, slim reservation bar */
+.hero__grid, .hero__grid { grid-template-columns: 1fr; }
+@media (min-width: 52rem) { .hero__grid { grid-template-columns: 1fr; padding-block: var(--space-9) var(--space-7); } }
+.hero h1 { font-size: clamp(2.75rem, 8.4vw, 6.75rem); line-height: 1; }
+.quick--bar { grid-template-columns: 1fr; margin-bottom: var(--space-7); width: min(100% - 2 * var(--gutter), var(--max)); }
+.quick--bar .quick__title { font-size: 1.25rem; }
+@media (min-width: 52rem) {
+  .quick--bar { grid-template-columns: 1fr 1fr auto; align-items: end; max-width: 48rem; margin-right: auto; }
+  .quick--bar .quick__row { display: contents; }
+  .quick--bar .quick__title, .quick--bar .quick__note { grid-column: 1 / -1; }
+  .quick--bar .btn { width: auto; min-width: 11rem; }
+}
+
+/* 3. Section composition: editorial split heads, staggered cards */
+@media (min-width: 52rem) {
+  .sec-head { display: grid; grid-template-columns: 5fr 7fr; gap: var(--space-8); align-items: end; }
+  .sec-head .lede { margin-top: 0; }
+  .cards .card:nth-child(2) { margin-top: var(--space-7); }
+  .cards .card:nth-child(3) { margin-top: var(--space-5); }
+}
+.sec-head .hero__ctas { margin-top: var(--space-5); }
+
+/* 4. Placeholders: quiet contact-sheet frames, no stripes or heavy gradients */
+.ph { background: var(--a); border: 1px solid #d3c8ae; color: #4d493f; place-items: end start; text-align: left; border-radius: 2px; }
+.ph--forest { --a: #dfe2d6; } .ph--clay { --a: #e6d6cb; } .ph--brass { --a: #eadfc8; } .ph--ivory { --a: #e9e1d0; }
+.ph::before { display: none; }
+.ph__mark { display: none; }
+.ph figcaption { padding: var(--space-4); max-width: none; }
+.ph figcaption span { font-size: var(--step-label); opacity: .75; }
+.on-dark .ph { background: rgb(255 255 255 / .06); border-color: rgb(255 255 255 / .2); color: rgb(242 235 221 / .85); }
+
+/* 5. Booking journey */
+.demo-banner { padding: var(--space-2) var(--space-4); font-size: .875rem; margin-bottom: var(--space-5); border-radius: 4px; }
+.demo-banner strong { display: inline; margin: 0; }
+.steps { gap: var(--space-2); margin-bottom: var(--space-6); }
+.steps li { font-size: var(--step-label); white-space: nowrap; }
+.widget-note { font-size: var(--step-label); color: #5b564c; margin-top: var(--space-5); }
+@media (max-width: 52rem) { .aside { position: static; } }
+
+/* Hero fit: keep the reservation bar inside a 900px-high desktop viewport, aligned with the headline */
+.hero h1 { font-size: clamp(2.75rem, 7vw, 5.5rem); }
+@media (min-width: 52rem) {
+  .hero__grid { padding-block: var(--space-8) var(--space-6); }
+  .quick--bar { width: min(48rem, 100% - 2 * var(--gutter)); margin-left: max(var(--gutter), calc((100vw - var(--max)) / 2)); margin-right: auto; margin-bottom: var(--space-7); }
+}
+
+/* Regression fixes: caption contrast, small-screen fold */
+.ph figcaption span { opacity: 1; }
+.hero h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+@media (max-width: 52rem) { .hero__grid { padding-block: var(--space-6) var(--space-5); gap: var(--space-5); } }
