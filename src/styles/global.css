@@ -251,3 +251,8 @@ fieldset { border: 0; margin: 0 0 1.25rem; padding: 0; }
 address { font-style: normal; }
 .page-head + section { padding-top: var(--space-7); }
 .menu-list { margin-top: 0; }
+
+/* Inner pages */
+.btn--ghost-dark { color: var(--forest); }
+.btn--ghost-dark:hover { background: rgb(37 58 46 / .08); }
+.h3 { font-family: var(--ff-serif); font-weight: 400; font-size: 1.2rem; margin: 0 0 var(--space-2); }

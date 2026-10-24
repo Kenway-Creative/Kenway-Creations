@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('The Horse, 196 Ashby Road West, Shepshed, LE12 9EF');
+---
+<Base title="Find us – The Horse, Shepshed (unofficial concept)" description="Address, phone and directions for The Horse, Shepshed.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Find us</p>
+      <h1>Ashby Road West, <em>Shepshed.</em></h1>
+    </div>
+  </section>
+
+  <section aria-label="Contact details">
+    <div class="wrap">
+      <div class="find">
+        <div><h2 class="h3">Address</h2><address>The Horse<br />196 Ashby Road West<br />Shepshed<br />LE12 9EF</address></div>
+        <div><h2 class="h3">Opening times &amp; bookings</h2><p>Please call us on <a href="tel:+441509507006">01509 507006</a> to check opening times or to ask about a room.</p></div>
+      </div>
+      <div class="actions"><a class="btn btn--forest" href={mapUrl} rel="noopener">Get Directions</a><a class="btn btn--ghost btn--ghost-dark" href="tel:+441509507006">Call Us</a></div>
+    </div>
+  </section>
+
+  <ClosingCta />
+</Base>

@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+---
+<Base title="Stay – The Horse, Shepshed (unofficial concept)" description="Six guest bedrooms in The Barn Courtyard at The Horse, Shepshed.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Stay</p>
+      <h1>Stay <em>a little longer.</em></h1>
+      <p class="lede">Make yourself at home in The Barn Courtyard, with six guest bedrooms conveniently located for East Midlands Airport, Donington Park and the surrounding area.</p>
+    </div>
+  </section>
+
+  <section class="on-dark" aria-labelledby="rooms-h">
+    <div class="wrap split">
+      <div>
+        <h2 id="rooms-h">The Barn <em>Courtyard.</em></h2>
+        <ul class="facts">
+          <li><b>Premium King</b><span>2 rooms</span></li>
+          <li><b>Double</b><span>4 rooms</span></li>
+          <li><b>Rates &amp; availability</b><span>On enquiry</span></li>
+        </ul>
+        <p>To ask about a room, please call us on <a href="tel:+441509507006">01509 507006</a>.</p>
+        <div class="actions"><a class="btn btn--brass" href="tel:+441509507006">Call to Enquire</a><a class="btn btn--ghost" href="/find-us/">Find Us</a></div>
+      </div>
+      <div class="stack">
+        <Photo label="Premium King bedroom" asset="premium-king.jpg" tone="clay" ratio="16 / 10" />
+        <Photo label="Double bedroom" asset="double.jpg" tone="brass" ratio="1 / 1" />
+        <Photo label="The Barn Courtyard" asset="barn-courtyard.jpg" tone="ivory" ratio="1 / 1" />
+      </div>
+    </div>
+  </section>
+
+  <ClosingCta />
+</Base>

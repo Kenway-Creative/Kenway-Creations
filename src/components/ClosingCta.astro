@@ -1,0 +1,11 @@
+---
+// Approved prototype closing copy; shared by the home page and the inner pages.
+const { id = 'close-h' } = Astro.props;
+---
+<section class="on-dark closing" aria-labelledby={id}>
+  <div class="wrap">
+    <h2 id={id}>Come hungry. <em>Leave happy.</em></h2>
+    <p class="lede">Explore the menus, discover what's on, or find a table for your next visit.</p>
+    <div class="actions"><a class="btn btn--brass" href="/book/">Book a Table</a><a class="btn btn--ghost" href="/menus/">Explore Our Menus</a></div>
+  </div>
+</section>

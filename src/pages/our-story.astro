@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+---
+<Base title="Our story – The Horse, Shepshed (unofficial concept)" description="The people and pub behind The Horse, Shepshed.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Our story</p>
+      <h1>The people behind <em>The Horse.</em></h1>
+    </div>
+  </section>
+
+  <section aria-label="About The Horse">
+    <div class="wrap split">
+      <div>
+        <p class="lede">The Horse is an independent freehouse, bar and restaurant on Ashby Road West in Shepshed, with The Stables wood-fired pizzeria and six guest bedrooms in The Barn Courtyard.</p>
+        <p>A proper pub should feel like somewhere you belong, with thoughtfully prepared food, good drinks and the sort of hospitality that makes you want to come back.</p>
+        <p class="hint">The full story, in the team's own words, is still to come.</p>
+        <p><a class="link-arrow" href="/find-us/">Come and see for yourself</a></p>
+      </div>
+      <Photo label="Kitchen or team" asset="team.jpg" tone="forest" ratio="4 / 5" />
+    </div>
+  </section>
+
+  <ClosingCta />
+</Base>
