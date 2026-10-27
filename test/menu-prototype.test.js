@@ -46,3 +46,11 @@ test('unavailable dishes are excluded from listings', () => {
   m.sections[0].items[0].available = false;
   assert.ok(!renderMenu(m).includes('Test dish'));
 });
+
+test('menu carries a week and renders it to customers', () => {
+  const m = complete();
+  assert.match(m.weekOf, /^\d{4}-\d{2}-\d{2}$/);
+  assert.ok(renderMenu(m).includes('Week commencing ' + m.weekOf));
+  m.weekOf = '';
+  assert.ok(validateMenu(m).some(x => x.includes('week')));
+});
