@@ -27,7 +27,10 @@ export function money(value) {
 export function initialMenu(id) {
   const type = MENU_TYPES.find(t => t.id === id);
   if (!type) throw new Error('Unknown menu');
-  return { id, title: type.label, sections: [], updatedAt: null };
+  const today = new Date();
+  const monday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - ((today.getDay() + 6) % 7));
+  const weekOf = [monday.getFullYear(), String(monday.getMonth() + 1).padStart(2, '0'), String(monday.getDate()).padStart(2, '0')].join('-');
+  return { id, title: type.label, weekOf, sections: [], updatedAt: null };
 }
 export function emptyStore() {
   return { version: 1, drafts: {}, published: {}, history: {} };
@@ -47,6 +50,7 @@ export function validateMenu(menu) {
   const errors = [];
   if (!menu || !MENU_TYPES.some(t => t.id === menu.id)) return ['Unknown menu type.'];
   if (!String(menu.title || '').trim()) errors.push('Enter a menu title.');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(menu.weekOf || '') || Number.isNaN(Date.parse(menu.weekOf))) errors.push('Choose a valid week commencing date.');
   if (!Array.isArray(menu.sections) || !menu.sections.length) errors.push('Add at least one section.');
   if (menu.sections?.length > MAX_SECTIONS) errors.push('Too many sections.');
   let itemCount = 0;
@@ -78,7 +82,7 @@ export function renderMenu(menu, { preview = false } = {}) {
       '</ul></section>';
   }).join('');
   return '<article class="published-menu">' +
-    '<header class="published-menu__head"><h2>' + escapeHtml(menu.title) + '</h2>' +
+    '<header class="published-menu__head"><div><h2>' + escapeHtml(menu.title) + '</h2><p class="published-menu__dates">Week commencing ' + escapeHtml(menu.weekOf || 'not set') + '</p></div>' +
     (preview ? '<span class="published-menu__tag">Preview only</span>' : '') +
     '</header>' + sections + '</article>';
 }
