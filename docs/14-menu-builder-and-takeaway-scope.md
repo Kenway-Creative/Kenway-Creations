@@ -1,103 +1,137 @@
-# The Horse — weekly menu builder and takeaway ordering scope
-**Status:** proposal only; not implemented, commissioned, approved or connected to live systems.
-**Product principle:** the restaurant, its bookings and in-person experience come first. Takeaway is a small, kitchen-controlled collection channel, not a competing delivery marketplace.
+# The Horse — chef menu publisher, phone takeaway and venue content
 
-## 1. Desired outcomes
-- Chef can prepare, preview, schedule and publish this week's restaurant menus without touching code or asking a developer.
-- Guests can see an accurate, dated current menu on mobile, including relevant prices and dietary/allergen information approved by the venue.
-- Chef can optionally offer selected dishes for **collection**, independently of the dine-in menu.
-- Online ordering can be switched off instantly during a busy service, with no stale availability or accidental orders.
-- Book a Table remains the primary site conversion; takeaway is discoverable but secondary.
+**Status:** approved project direction for an **unofficial prototype**, not a live venue-approved service. The menu editor is **scoped but not built**. No e-commerce, online order acceptance, basket, checkout or payment integrations.
 
-## 2. Important discovery before building
-1. Confirm the venue actually wants takeaway, whether collection only, which days/services, lead time, cutoff, maximum orders per slot, minimum spend, packaging charges and collection handoff.
-2. Confirm the planned Toast products, UK merchant configuration, account ownership and **actual** supported capabilities for menu publishing, online ordering, payments, kitchen routing, webhooks and embed/hosted links. Do not assume Toast Tables (reservations) also provides online ordering.
-3. Ask who owns menu publishing (head chef, sous chef, manager), who approves prices and allergens, and whether the venue has a source-of-truth POS menu.
-4. Agree food allergen review/approval, VAT/price display, cancellation/refund terms, customer contact details and privacy policy with the operator.
-5. Confirm whether existing menu PDFs remain as archives or should be replaced by web-rendered weekly menus.
+**Primary objective:** bring guests into the restaurant. Table bookings and dining-in remain the primary calls to action. Takeaway is a modest secondary option handled by phone.
 
-## 3. Recommended implementation decision
-**Prefer existing Toast capability if it fits:** if the venue's confirmed Toast setup can host takeaway ordering and route orders to the kitchen, link or embed its approved customer flow instead of duplicating POS, payments and kitchen operations. Validate branding, UK availability, merchant fees and data access first.
+## 1. What we are building
 
-**If Toast does not cover chef-managed weekly menus:** build a small authenticated content-management layer to publish menus into Astro. Keep reservations with Toast Tables.
+A secure, chef-friendly **Menu Manager** to create, edit, preview, schedule and publish this week's menus to the website's **live public menu listings**, without touching GitHub, code or a developer.
 
-**Only build a custom ordering backend if necessary:** this is a separate operational and security project, not an extension of the current static GitHub Pages demo. A hosted payment provider, secure API, persistent database and kitchen order-acceptance flow are prerequisites. Do not put API keys or payment handling in client-side Astro code.
+The same tool should support:
+- **Restaurant menus:** lunch, evening, Sunday and any other approved service.
+- **Takeaway menu:** independently selected dishes and prices, displayed as a listing with **Call to Order**. Orders are taken by telephone on **01509 507006**; collection arrangements are agreed with staff.
+- **Menu revisions:** draft, scheduled, published, archived; previous versions remain recoverable.
+- **Dish availability:** mark unavailable, remove from this week's menu or publish a replacement.
 
-## 4. Chef-facing menu builder (MVP)
-### Content model
-- **Menu:** name, channel (dine-in/takeaway), service (lunch/evening/Sunday), start/end date and time, status (draft/scheduled/published/archived), last published timestamp, revision.
-- **Section:** starters, mains, sides, desserts etc.; display order.
-- **Dish:** title, short description, optional genuine photograph, price in GBP, allergens and dietary tags, operator-approved allergen notes, available/unavailable flag.
-- **Menu item:** dish + per-menu price/description override and ordering position. Reuse a dish across weeks without overwriting historical prices.
-- **Availability:** channel-specific toggle, optional per-day stock limit, service times; never imply all dine-in dishes can be taken away.
-- **Audit:** editor, approver, publish date and previous revision for rollback.
+The public website must not imply that every dine-in dish is offered for takeaway. There is no live ordering workflow.
 
-### Chef workflow
-1. Sign in with a role-based account; no public write access.
-2. Duplicate last week's menu, edit items and prices, reorder sections with simple controls.
-3. Preview exactly what customers will see on mobile, including allergen information.
-4. Save draft; manager/chef approval required before publishing (configurable).
-5. Publish now or schedule by local UK date/time. The public menu displays its effective week/date and an enquiry fallback if none is published.
-6. Mark a dish unavailable, pause takeaway or roll back a published version without redeploying code manually.
-7. View an audit trail of who changed a price, dish or allergen statement.
+## 2. Chef-facing editing experience
 
-### Public website
-- Dedicated **This week's menus** view (responsive HTML, accessible and indexable only after official launch).
-- Distinct restaurant and takeaway menus, with clear date/service labels.
-- Menu may change; do not show fabricated dishes, prices or availability in the current prototype.
-- Keep PDF links during transition, then remove only with venue approval.
-- For a static Astro site, a secured publish action may trigger a rebuild; for time-critical availability and takeaway orders, use a live server endpoint rather than relying on build timing.
+### Menu list / dashboard
+- Clear cards for **This Week's Lunch**, **Evening**, **Sunday Lunch**, **Takeaway**.
+- Current publication status, effective dates and last published time.
+- **Create**, **Duplicate last week**, **Edit**, **Preview**, **Publish**, **Schedule** and **Unpublish**.
+- Easy to use on a tablet or mobile in a working kitchen, not a technical CMS interface.
 
-## 5. Collection ordering — separate phase
-### Guest journey
-1. Open Takeaway; see only the current takeaway menu for a valid collection service.
-2. Select dishes, quantities and permitted modifiers; see running total and any charges.
-3. Choose a **real** collection slot offered by the kitchen, accounting for lead time and capacity.
-4. Enter minimum required contact details, review allergens and order details, and pay via a compliant hosted checkout if online payment is approved.
-5. Receive a clear confirmation **only after** the order is durably accepted by the system and routed to the kitchen; otherwise show failure/retry guidance.
-6. Receive collection reference, time and contact instructions. No delivery option in MVP.
+### Menu editor
+- Add sections such as starters, mains, sides, desserts; drag to reorder.
+- Add or reuse dishes with name, description, GBP price, dietary/allergen data, optional **genuine** photograph, and available/unavailable status.
+- Override description and price per menu without changing other menus.
+- Set menu's effective date/time in **Europe/London**; optionally show an **Updated** timestamp.
+- Preview the exact public layout before publishing.
+- Validate missing prices, empty menus, allergen review and unintended duplicate dishes before publication.
+- Confirmation for publish/unpublish; manager approval optional depending on staffing.
+- Audit history (who changed what and when) and one-click restore of a previous version.
 
-### Kitchen controls
-- Open/close ordering by service, pause instantly, set slot capacity and preparation lead time.
-- Set dishes as sold out, manage modifiers and per-item stock where supported.
-- Receive new orders through a confirmed kitchen workflow (prefer POS/KDS integration; otherwise a dedicated, monitored tablet/print path).
-- Accept/reject and mark preparing/ready/collected; prevent orders during closed or saturated slots.
-- Handle missed pickups, cancellations, refunds and failed payments explicitly.
+### Suggested content model
+- `menu`: id, title, service, channel (restaurant/takeaway), start_at, end_at, status, published_revision_id.
+- `menu_section`: menu_id, title, sort_order.
+- `dish`: id, title, description, genuine_image_asset, allergen_flags, dietary_tags, allergen_reviewed_at.
+- `menu_item`: menu_section_id, dish_id, displayed_price_gbp, description_override, sort_order, available.
+- `menu_revision`: snapshot, editor, approved_by, created_at, published_at.
+- `staff_user`: identity and editor/publisher roles.
+- `audit_event`: actor, action, target, timestamp.
 
-### Safety, data and reliability
-- Server-side price and availability validation at checkout; never trust client totals.
-- Transaction-safe slot/stock reservations, duplicate-request protection and idempotent payment webhooks.
-- No card details stored by the website; use a PCI-compliant hosted payment provider.
-- Least-privilege staff roles, secure sessions, audit logs, rate limits, backups and monitoring.
-- UK GDPR: minimal personal data, retention/deletion rules, privacy notice and appropriate processor agreements.
-- Allergen information must be supplied and verified by the venue; establish a process for changes, cross-contact notices and staff escalation.
-- Define kitchen outage fallback: disable new orders rather than silently accepting them.
+Do not infer allergens from dish names or AI; the restaurant is responsible for verifying all allergen statements.
 
-## 6. Suggested high-level data entities
-`staff_users`, `roles`, `menus`, `menu_revisions`, `sections`, `dishes`, `menu_items`, `service_windows`, `pickup_slots`, `slot_capacity`, `orders`, `order_lines` (immutable price/name snapshot), `payment_events`, `order_status_events`, `audit_events`.
+## 3. Publishing to the live site
 
-Do not store a customer's order against mutable live dish records alone; keep snapshots for receipts and refunds. Define venue-local time zone as Europe/London for scheduling.
+**Recommendation for MVP:** a managed headless CMS with a friendly editor and role-based sign-in (evaluate Sanity or a comparable platform). Connect its **Publish** action to a protected GitHub Actions deployment trigger for the existing Astro + GitHub Pages site.
 
-## 7. Rollout milestones
-**Phase 0 — discovery and operator sign-off:** Toast capability audit, menu ownership, collection operations, compliance and payment decision. Output: signed-off flow and acceptance criteria.
+Flow:
 
-**Phase 1 — weekly menus:** chef login, menu CRUD, draft/preview, scheduling/publishing, responsive public menu, fallback and audit trail. No orders/payments. Test a weekly publish and rollback with the chef.
+`Chef signs in → edits menu → previews → clicks Publish → CMS validates/saves → authenticated webhook triggers GitHub Pages build → site reads published CMS menu data → deployment succeeds → new menu visible on /menus/ and /takeaway/`
 
-**Phase 2 — collection MVP:** live availability, limited takeaway menu, slot capacity, kitchen routing, checkout, confirmation, refund and pause controls. Pilot on one quiet service with order caps.
+The chef never needs a GitHub account or access to the code repository.
 
-**Phase 3 — optimisation:** menu performance, repeat customers with appropriate consent, waste/stock insights and operational reporting; only after a successful pilot.
+**Important:** the current GitHub Pages website is static. Publishing via a rebuild is **not instantaneous**; design for updates to appear within a few minutes and show publication/deployment status, including failure/retry. Do not tell the chef a menu is live until deployment has succeeded and the public page reflects the revision. Keep the last known-good public menu on build failure.
 
-## 8. Acceptance criteria
-- Chef can replace the weekly menu and publish from a phone or tablet without developer help.
-- Incorrect/unapproved menus cannot go live accidentally; last good published menu remains recoverable.
-- Dine-in menu and Book a Table remain more prominent than takeaway.
-- A takeaway order cannot be placed for a closed service, sold-out item or full collection slot.
-- Staff can stop new orders immediately and see every accepted order.
-- Customers never receive a false confirmation or a charge without a documented resolution path.
-- End-to-end tests cover publication, scheduling across BST/GMT, allergens, unavailable items, duplicate checkout, payment failures, kitchen outage and refunds.
+If immediate sold-out changes become essential, evaluate a secured runtime content API and cache invalidation separately. Do not pretend a static rebuild provides real-time inventory.
 
-## 9. Out of scope for the first release
-Delivery, marketplace integrations, driver tracking, loyalty accounts, complex discounts, gift cards, multi-venue routing, AI-written menus and automatically inferred allergen data.
+### CMS acceptance criteria
+1. Chef can publish an approved weekly menu from a phone or tablet without developer involvement.
+2. The public **/menus/** shows the latest published restaurant menus with effective dates, dish descriptions and approved prices.
+3. The public **/takeaway/** shows only the published takeaway menu, plus prominent **Call 01509 507006** action; never a basket or checkout.
+4. A successful publish triggers a production rebuild and the chef can see whether the revision is **Live**, **Publishing** or **Failed**.
+5. Scheduled menu activation and expiry work across GMT/BST boundaries, including missing-menu fallback.
+6. Published menus are archived for rollback and changes are audited.
+7. Drafts, unpublished prices and staff identities are not exposed publicly.
+8. Book a Table remains the most prominent conversion path.
 
-## 10. Current website prototype status
-The public concept has a secondary takeaway section and an informational `/takeaway/` page. **It cannot accept takeaway orders**. No menu CMS, authenticated admin, database, checkout or Toast online-order integration has been implemented. Do not label any of these as live until configured, tested and approved by the venue.
+## 4. Public website presentation
+
+### /menus/
+- **This week's menus**: lunch, evening and Sunday (only those approved and currently published).
+- Clean web-native sections and dish listings; mobile readable; accessible.
+- Show effective week/date and last update. Clearly distinguish dine-in from takeaway.
+- Existing venue PDFs remain labelled **previously published PDFs** during transition, never automatically described as current.
+- No fabricated dishes, prices, service times or allergen claims.
+
+### /takeaway/
+- Secondary navigation path from homepage and menus; do not displace restaurant booking CTAs.
+- Chef-selected **Takeaway this week** listing, if a current menu is published.
+- Primary action **Call to order: 01509 507006**.
+- Explain that dishes and collection times are confirmed with the team by phone.
+- No online orders, carts, checkout, delivery, payment gateway, pickup-slot reservations or customer accounts.
+
+## 5. Facebook photographs and events
+
+User-provided reference: https://www.facebook.com/TheHorseShepshed.co.uk/
+
+Use the venue's Facebook presence as a **research and content-sourcing reference** for genuine photographs, events, offers and announcements. Facebook was not accessible for direct review in this session, so **no specific event is verified**.
+
+Editorial process:
+1. Staff or project owner identifies a post, photo or event.
+2. Verify date, venue, details, whether still current and any ticket/booking instructions with the venue.
+3. Obtain permission for image reuse and retain the approved original file, caption/credit and source URL.
+4. Add to a reviewed events list with start/end date and publication/expiry controls.
+5. Do not auto-scrape, hotlink or automatically republish social posts; never publish expired events.
+6. Prioritise approved real photography over old archive images; **no AI-generated venue imagery**.
+
+The public **What's On** page links to the Facebook page as an interim way to check announcements. A proper event manager can be a later extension of the same CMS, but not a blocker for weekly menu publishing.
+
+## 6. Build sequence
+
+**Milestone A — confirm content and ownership**
+- Confirm menu categories, source of truth (Toast POS vs website), editor accounts and who signs off allergens/prices.
+- Confirm if the venue wants a menu on takeaway at all times or only when it is offered.
+- Agree publication SLA (e.g. within a few minutes), role permissions and menu expiry behaviour.
+- Obtain permission to use Facebook-sourced photographs/events.
+
+**Milestone B — chef menu publisher MVP**
+- Select CMS, create roles, content schemas and friendly editing screens.
+- Implement draft/preview/publish and publication webhook/deployment status.
+- Render approved current menus from CMS in Astro; preserve PDF fallback.
+- Test on mobile/tablet with a real chef and test expiry/rollback.
+
+**Milestone C — phone takeaway listing**
+- Use the same CMS to mark selected menu items as takeaway.
+- Publish takeaway-only listing and telephone CTA; no customer data captured.
+- Check the kitchen can honour the published selection and that changes propagate promptly.
+
+**Later (separately approved):** CMS-managed events, seasonal promotions, better photo library. No e-commerce is in the current scope.
+
+## 7. Explicit exclusions
+
+- No online payments, carts, checkout, online order submissions or delivery.
+- No order, payment, pickup-slot or customer account tables.
+- No Toast online ordering integration. Toast **Tables reservations** remain a separate workstream; any POS menu integration requires validation of actual API capabilities and venue permission.
+- No automatic Facebook scraping or auto-publishing unverified events.
+- No fictitious dishes, prices, photos, service times or allergens.
+
+## 8. Current prototype vs future functionality
+
+**Already on GitHub Pages:** static homepage takeaway section, informational `/takeaway/` page with telephone link, menu PDFs, link to the venue's Facebook page on `/whats-on/`, and the existing table-booking demonstration.
+
+**Not yet implemented:** authenticated chef admin, content database/CMS, live weekly menu listings, publish webhook, deployment status, scheduled publishing or menu rollback. These must not be presented as working until actually built, tested and approved.
