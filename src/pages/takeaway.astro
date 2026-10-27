@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../lib/with-base.js';
 import Base from '../layouts/Base.astro';
+import '../styles/menu-manager.css';
 ---
 <Base title="Takeaway – The Horse, Shepshed (unofficial concept)" description="Takeaway enquiries and telephone orders at The Horse, Shepshed. Call to check the menu and availability.">
   <section class="page-head">
@@ -10,6 +11,8 @@ import Base from '../layouts/Base.astro';
       <p class="lede">Staying in? Get in touch with the pub to ask what is available for takeaway.</p>
     </div>
   </section>
+
+  <section data-menu-public="takeaway" hidden aria-label="Browser-only takeaway menu preview"></section>
 
   <section aria-labelledby="takeaway-plan-h" class="takeaway-page">
     <div class="wrap takeaway-page__grid">
@@ -33,3 +36,8 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 </Base>
+
+<script>
+  import { initPublicMenus } from '../lib/menu-prototype.js';
+  initPublicMenus();
+</script>
