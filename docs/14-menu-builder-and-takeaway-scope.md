@@ -47,15 +47,19 @@ Do not infer allergens from dish names or AI; the restaurant is responsible for 
 
 ## 3. Publishing to the live site
 
-**Recommendation for MVP:** a managed headless CMS with a friendly editor and role-based sign-in (evaluate Sanity or a comparable platform). Connect its **Publish** action to a protected GitHub Actions deployment trigger for the existing Astro + GitHub Pages site.
+**Production hosting decision (27 Oct 2026): GitHub Pages is only the proof-of-concept preview, never the final venue host.** Keep GitHub as source control and optionally a noindex staging preview. The finished Astro website is to be deployed to a separate production hosting platform on a domain controlled by The Horse. Current recommendation: Cloudflare Pages, subject to venue approval and production acceptance testing. See `docs/15-production-hosting-and-commercials.md` for pricing assumptions and client commercial structure.
+
+**Recommended production MVP:** a hosted headless CMS such as Sanity, connected to the Astro website. The CMS holds published menu content and offers a chef-friendly editor. A secure **production host deploy hook** triggers a new Astro build when a menu is published; the build reads the latest approved CMS content and deploys to the venue's domain.
 
 Flow:
 
-`Chef signs in → edits menu → previews → clicks Publish → CMS validates/saves → authenticated webhook triggers GitHub Pages build → site reads published CMS menu data → deployment succeeds → new menu visible on /menus/ and /takeaway/`
+`Chef signs in → edits menu → previews → clicks Publish → CMS validates/saves → secure Cloudflare Pages deploy hook → production build reads published CMS content → production deployment succeeds → new menu visible on /menus/ and /takeaway/`
 
-The chef never needs a GitHub account or access to the code repository.
+The chef does not need a GitHub account or to use the host's control panel. GitHub remains a development repository, not a public-facing hosting provider.
 
-**Important:** the current GitHub Pages website is static. Publishing via a rebuild is **not instantaneous**; design for updates to appear within a few minutes and show publication/deployment status, including failure/retry. Do not tell the chef a menu is live until deployment has succeeded and the public page reflects the revision. Keep the last known-good public menu on build failure.
+**Important:** the website remains static at this stage. Publishing via a rebuild is **not instantaneous**; design for updates to appear within a few minutes and show publication/deployment status, including failure/retry. Do not tell the chef a menu is live until deployment has succeeded and the public page reflects the revision. Keep the last known-good public menu on build failure.
+
+For scheduled menu changes, use the CMS's supported scheduler or an approved secure scheduling service to trigger production rebuilds at the correct UK time. Do not assume the free CMS plan includes scheduled drafts.
 
 If immediate sold-out changes become essential, evaluate a secured runtime content API and cache invalidation separately. Do not pretend a static rebuild provides real-time inventory.
 
