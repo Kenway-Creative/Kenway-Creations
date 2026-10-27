@@ -2,19 +2,16 @@
 
 Independent design prototype for a pitch to the owners. **Not the official website. No changes are made to the live site.**
 
-## Status (20 Oct 2026)
+## Current status (27 Oct 2026)
 
-| Item | State |
-|---|---|
-| Homepage prototype (responsive, accessible, no cookies/third parties) | Built and refined; Lighthouse 99–100 perf, 100 a11y/best-practice (SEO 60 = deliberate `noindex`) |
-| Demonstration booking journey (fictional availability) | Built; empty `ToastWidget` slot ready for the venue's snippet |
-| Toast approach | Revised: Astro → Toast Tables widget/link → Toast-managed reservations (no reservation backend) |
-| Audit | Verified public facts incorporated (GPT-reported); page content/assets still not reachable from the sandbox |
-| Real logo and photography | **Not yet available** – labelled placeholders and text wordmark. See `docs/08-asset-checklist.md` |
-| GitHub and private preview | Not yet pushed or deployed: waiting on GitHub access and a confirmed-private repository. Secure sequence in `docs/13-github-and-cloudflare-runbook.md` (earlier plan: `docs/09-private-preview-plan.md`) |
-| QA | `docs/11-qa-report.md` (Chromium only; Firefox/WebKit blocked by the sandbox network policy) |
-
-This is a self-funded, unofficial concept: no contract, fee or approval exists. Docs contain no development charges.
+- Public **unofficial** concept on GitHub Pages: https://kenway-creative.github.io/Kenway-Creations/ (noindex, not the official restaurant site).
+- Astro site and responsive pages deployed through `.github/workflows/pages.yml`. This README does not certify any particular workflow run as successful.
+- Genuine venue and owner-supplied photos used where available; poor-quality terrace photograph removed in favour of a labelled placeholder. No AI-generated venue imagery.
+- Menu page currently links **previously published PDFs**, not live weekly menu listings.
+- Takeaway is a **phone enquiry/order path**, not e-commerce: `/takeaway/` points customers to 01509 507006. No online orders or payments.
+- **Chef menu manager is a proposed next build**, not implemented. See `docs/14-menu-builder-and-takeaway-scope.md`. Its Publish action must update the website's public weekly menu listings without developer intervention.
+- Venue Facebook reference for genuine imagery and event research: https://www.facebook.com/TheHorseShepshed.co.uk/ . Verify event facts and photo permissions before reuse.
+- Table-booking journey remains a demonstration; Toast Tables integration requires venue setup/approval.
 
 ## Run
 
@@ -30,7 +27,7 @@ Config lives in `.env` (copy `.env.example`; never commit). The only variable is
 ## Rules this prototype follows
 
 - `noindex` on every page; no analytics, cookies or external requests (fonts are self-hosted).
-- Photographs are labelled placeholders. No stock or AI imagery. No dishes, prices, hours, awards, rates or events are invented.
+- Only genuine venue/owner-supplied photographs or labelled placeholders. No stock or AI-generated venue imagery. No dishes, prices, hours, awards, rates or events are invented.
 - The booking journey is labelled as a demonstration, sends nothing and stores nothing.
 
 ## Layout
