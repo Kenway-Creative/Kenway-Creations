@@ -41,6 +41,29 @@ jobs:
             wc -c /tmp/horse-photo-probe/home.html
             grep -oE 'https?[^" ]+\\.(jpg|jpeg|png|webp)' /tmp/horse-photo-probe/home.html | head -25 || true
           fi
+      - name: Discover official image sources
+        run: |
+          python - <<'PY'
+          import re,html
+          from urllib.request import urlopen, Request
+          urls=['https://www.thehorseshepshed.co.uk/','https://www.thehorseshepshed.co.uk/about-us/','https://www.thehorseshepshed.co.uk/the-barn-courtyard/']
+          for url in urls:
+              print('PAGE',url)
+              try:
+                  page=urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=15).read().decode('utf-8','ignore')
+                  found=re.findall(r'[^"\\s<>]+\\.(?:jpg|jpeg|png|webp)',html.unescape(page),flags=re.I)
+                  unique=list(dict.fromkeys(found))
+                  for value in unique[:55]: print('IMG',value[:200])
+              except Exception as e: print('ERROR',str(e)[:180])
+          url='https://www.thehorseshepshed.co.uk/wp-json/wp/v2/media?per_page=30'
+          try:
+              import json
+              x=json.load(urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=15))
+              if isinstance(x,list):
+                  for o in x[:30]: print('MEDIA',o.get('id'),str(o.get('alt_text',''))[:70],o.get('source_url'))
+              else: print('API not list')
+          except Exception as e: print('WP API',str(e)[:180])
+          PY
       - name: Build for Pages
         env:
           DEPLOY_GITHUB_PAGES: 'true'
