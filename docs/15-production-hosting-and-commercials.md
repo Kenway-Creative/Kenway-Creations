@@ -38,41 +38,48 @@ Sources (official):
 
 Do not convert USD to a fixed GBP charge or promise an ongoing free plan without checking the provider at contract time.
 
-## 3. Commercial proposal options — developer's illustrative selling prices (GBP)
+## 3. Founding client commercial arrangement — The Horse
 
-These are **suggested fees to charge**, not externally sourced market averages and not prices accepted by the venue.
+**Founder decision (27 October 2026): The Horse is the first customer and a reference account. No design, development, setup or chef menu-manager implementation fee will be charged.** The business intends to charge only a modest monthly managed-hosting fee, not a conventional agency project fee.
 
-| Package | One-off implementation | Ongoing developer support | Included |
-|---|---:|---:|---|
-| A — Website refresh | **£1,750–£2,500** | **£45–£75/month** | Finalise existing Astro website, approved content/photos, mobile QA, domain launch, booking link/widget configuration; **no menu CMS** |
-| **B — Website + chef menu manager (recommended)** | **£3,000–£4,500** | **£75–£125/month** | Package A plus secure CMS, menu schema, draft/preview/publish, weekly restaurant/takeaway listings, phone takeaway CTA, publishing automation, chef handover |
-| C — Fully managed content | **£4,500–£6,000+** | **£150–£250+/month** | Package B plus ongoing events/content updates, extra change allowance, periodic performance reviews and more active editorial support |
+### Proposed founding-client offer (not yet accepted by the venue)
 
-**Proposed first client-facing offer to consider:** **£3,250 setup + £95/month** for Package B, **plus third-party charges at cost**, and **VAT if applicable**.
+| Item | Price | Scope |
+|---|---:|---|
+| Design and development | **£0 one-off** | Finish the website, build the chef menu manager, implement approved public menu listings and telephone takeaway information |
+| Initial setup and launch | **£0 one-off** | Production deployment, domain migration coordination, basic chef handover |
+| Managed website hosting | **£25/month** | Website hosting oversight, deployment maintenance, basic security/dependency updates and reasonable bug fixes |
+| First-year managed hosting | **£300** | 12 × £25; no setup charge |
+| Existing domain renewal | **At cost / paid by venue** | Retain venue ownership and registrar billing |
+| Optional paid CMS/hosting upgrades | **At cost, only with prior written approval** | If free tiers prove insufficient, explain costs before enabling them |
+| Toast reservations / third-party licences | **Venue's own costs, if any** | Not included in hosting |
 
-Suggested internal breakdown of £3,250: website finishing/content/QA £1,250; menu CMS and integration £1,500; production hosting/domain cutover, testing and chef training £500. This is a planning allocation, not a timesheet or cost accounting.
+All prices are illustrative and **exclude VAT if applicable**. This is a pricing recommendation, **not an accepted agreement**.
 
-12 months of developer support at £95/month = **£1,140/year**. First-year project + support = **£4,390**, **excluding** third-party platform charges, domain renewal, Toast costs and any applicable VAT.
+### What £25/month does and does not mean
 
-### What the £95/month support fee could include
-- Hosting/deployment monitoring and response to failed deployments during stated business hours.
-- Routine dependency/security review and small maintenance fixes.
-- Basic CMS publishing assistance and one small change request per month (up to **1 hour**); chef manages routine menu content.
-- Reasonable backup/export check and support for rollback.
-- Annual review of vendor usage and costs.
+This is a **founding-client preferential price** for the first reference site, not a general price list. It assumes low traffic, modest CMS usage and eligibility for appropriate free-tier hosting/CMS services.
 
-**Not included:** 24/7 support, guaranteed emergency response, full-time content management, new pages/features, bespoke integrations, POS support, Toast licence, email hosting, ongoing photography, extensive SEO campaigns or event management.
+Included: basic hosting management, deployment monitoring, routine security/dependency checks, restoring a failed deployment where practical and correcting defects in the delivered functionality.
 
-Additional agreed work: illustrative **£60/hour**, subject to written approval. Avoid unlimited support promises.
+Excluded: unlimited design changes, continuous new-feature development, paid supplier upgrades, domain renewal, premium support SLA, round-the-clock response, restaurant content entry, social media management, photography, SEO campaigns and Toast licence/support.
 
-### Payment and contract model
-- Written scope and acceptance criteria before work begins.
-- **50% deposit / 50% on approved go-live**, with change control for additions.
-- Developer support billed monthly; define cancellation/notice (suggest 30 days) and any initial minimum term separately.
-- Third-party provider charges either **billed directly to the venue** or itemised as transparent pass-through at cost; avoid hiding them inside an unexplained 'hosting' markup.
-- Venue owns domain, customer-facing content, CMS and production hosting accounts. Provide an agreed code handover/licence and offboarding process in the contract.
-- VAT: show whether the supplier is VAT registered; add VAT only if applicable.
-- No purchase, account creation, DNS change or public launch without explicit authorisation.
+The chef manages their own weekly menu updates using the editor. Larger enhancements should be separately agreed; do not imply future development is free indefinitely.
+
+### Reference relationship and ownership
+
+Before go-live, agree in writing:
+1. Venue approves being named as a **case study/reference**, including use of its name, approved screenshots and a link to the finished website in the developer's portfolio.
+2. Request a genuine testimonial after the site has been in use; do **not** require a positive review or guarantee a testimonial.
+3. Venue owns its domain, approved content, and ideally its production hosting and CMS accounts. Document access, backups, export and offboarding.
+4. State whether the £25/month is fixed for an initial period (suggest **12 months**) and how any future increase will be agreed with notice.
+5. Clarify VAT treatment, invoice date, payment terms and a reasonable cancellation/notice period (suggest **30 days** after any agreed initial period).
+6. Define maintenance boundaries and response expectations so a low-cost reference project does not become an unlimited support obligation.
+7. Obtain venue approval before DNS changes, subscriptions or any production launch.
+
+### Business rationale
+
+The value is a real, live hospitality reference: working weekly menus, genuine photography, phone takeaway enquiries, reliable table-booking journeys and measurable website improvements. Collect permitted screenshots, usage/performance evidence and an authentic customer quote for later sales. The goal is **credible proof and repeatable delivery**, not maximising first-client revenue.
 
 ## 4. Launch requirements and exclusions
 
