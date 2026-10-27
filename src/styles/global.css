@@ -337,3 +337,6 @@ address { font-style: normal; }
   .food-gallery__item:last-child { grid-column: 1 / -1; max-width: 70%; }
   .location-images__grid { grid-template-columns: 1fr; }
 }
+
+/* Hero band: keep the roofline and signage in frame when the 4:3 exterior is cropped wide */
+.hero__photo.ph--real .ph__img { object-position: 50% 30%; }

@@ -1,8 +1,8 @@
 ---
-// Real venue photo if src/assets/venue/<asset> exists, otherwise a designed placeholder. Never stock or AI imagery.
+// Only optimised .webp files are bundled (originals in this folder are inputs to scripts/prepare-client-photos.mjs). Real venue photo if src/assets/venue/<asset> exists, otherwise a designed placeholder. Never stock or AI imagery.
 import { Image } from 'astro:assets';
 const { label, ratio = '4 / 3', tone = 'forest', class: cls = '', asset, fallbackAsset, alt = label, fallbackAlt, priority = false, sizes = '(min-width: 72rem) 50vw, 100vw' } = Astro.props;
-const files = import.meta.glob('../assets/venue/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' });
+const files = import.meta.glob('../assets/venue/*.webp', { eager: true, import: 'default' });
 const primary = asset ? files[`../assets/venue/${asset}`] : undefined;
 const backup = fallbackAsset ? files[`../assets/venue/${fallbackAsset}`] : undefined;
 const img = primary ?? backup;

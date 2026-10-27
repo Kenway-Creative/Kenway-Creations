@@ -21,6 +21,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Prepare owner-supplied photography
+        run: node scripts/prepare-client-photos.mjs
       - name: Prepare official archive photography
         run: node scripts/prepare-venue-images.mjs
       - name: Build for Pages

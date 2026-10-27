@@ -11,3 +11,5 @@ The Astro `Photo` component gives priority to `client-` images and falls back to
 The source images and some dishes are historical; confirm the restaurant has authorised public use and whether featured dishes are still offered before making this an official website.
 
 Do not upload phone metadata, original large JPGs or image files containing private guest information.
+
+> Update: the optimised `client-*.webp` files are generated from the original uploads by `node scripts/prepare-client-photos.mjs` (also run in the Pages workflow). See `docs/15-photo-provenance.md`.
