@@ -15,9 +15,9 @@ const photos = [
   { out: 'client-roast-plate-1.webp', src: 'Sunday Roast - Trio.jpg', crop: { left: 100, top: 85, width: 1008, height: 1260 }, width: 960 },
   { out: 'client-roast-board-1.webp', src: 'Sunday Roast - Beef.jpg', width: 960 },
   { out: 'client-katsu-1.webp', src: 'Pork Belly Katsu - Starter.jpg', width: 960 },
+  { out: 'client-hash-1.webp', src: 'Potato Hash - Starter.jpg', width: 960 },
   { out: 'client-hash-2.webp', src: 'Potato Hash - Starter 2.jpg', width: 960 },
 ];
-// Deliberately not produced: client-hash-1.webp, so the Lunch & Evening card keeps its current picture.
 
 for (const p of photos) {
   const raw = await readFile(new URL(p.src, dir));
