@@ -92,6 +92,7 @@ export function initMenuManager() {
       '<button type="button" class="mm-btn mm-btn--primary" data-action="save">Save draft</button>' +
       '<button type="button" class="mm-btn mm-btn--accent" data-action="publish">Publish demo</button>' +
       '<button type="button" class="mm-btn" data-action="preview">' + (preview ? 'Edit menu' : 'Preview menu') + '</button>' +
+      '<button type="button" class="mm-btn" data-action="next-week">Duplicate for next week</button>' +
       '<button type="button" class="mm-btn" data-action="restore" ' + (!published ? 'disabled' : '') + '>Copy published to draft</button>' +
       '<button type="button" class="mm-btn" data-action="undo" ' + (!store.drafts[selected] ? 'disabled' : '') + '>Discard edits</button>' +
       (published ? '<button type="button" class="mm-btn mm-btn--danger" data-action="unpublish">Unpublish demo</button>' : '') +
@@ -101,7 +102,8 @@ export function initMenuManager() {
         (draft.sections.length ? renderMenu(draft, { preview: true }) : '<p>Add dishes to preview the menu.</p>') +
         '</div>' :
         '<div class="mm-editor">' +
-        '<div class="mm-editor__meta"><label>Menu title <input data-field="title" maxlength="100" value="' + attr(draft.title) + '" /></label>' +
+        '<div class="mm-editor__meta"><div class="mm-fields mm-fields--two"><label>Menu title <input data-field="title" maxlength="100" value="' + attr(draft.title) + '" /></label>' +
+        '<label>Week commencing <input type="date" data-field="weekOf" value="' + attr(draft.weekOf) + '" /></label></div>' +
         '<p class="mm-muted">Changes are saved to this browser only. The restaurant website and its visitors are unaffected.</p></div>' +
         '<div class="mm-section-list">' + draft.sections.map(sectionHtml).join('') + '</div>' +
         '<button type="button" class="mm-add mm-add--section" data-action="add-section">+ Add section</button>' +
@@ -120,6 +122,7 @@ export function initMenuManager() {
     const item = section && iid ? section.items.find(i => i.id === iid) : null;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     if (field === 'title') draft.title = value;
+    else if (field === 'weekOf') draft.weekOf = value;
     else if (field === 'section-title' && section) section.title = value;
     else if (item && ['name', 'description', 'price', 'allergens', 'available', 'allergensReviewed'].includes(field))
       item[field] = value;
@@ -170,6 +173,15 @@ export function initMenuManager() {
       return;
     }
     if (action === 'preview') { preview = !preview; render(); return; }
+    if (action === 'next-week') {
+      if (!window.confirm('Create a draft for the following week using these dishes? Your current draft will remain saved only if you saved it first.')) return;
+      const parts = (draft.weekOf || '').split('-').map(Number);
+      const next = parts.length === 3 && parts.every(Number.isFinite)
+        ? new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + 7)) : new Date();
+      draft.weekOf = next.toISOString().slice(0, 10);
+      dirty = true; preview = false; render();
+      message('Next week’s draft is ready. Review dishes, prices and allergens, then save or publish.'); return;
+    }
     if (action === 'undo') {
       if (dirty && !window.confirm('Discard your unsaved edits?')) return;
       draft = clone(store.drafts[selected] || initialMenu(selected));
