@@ -64,6 +64,24 @@ jobs:
               else: print('API not list')
           except Exception as e: print('WP API',str(e)[:180])
           PY
+      - name: Gather venue photographs for visual review
+        run: |
+          set +e
+          mkdir -p /tmp/horse-asset-review
+          for name in banner-01.jpg banner-02.jpg banner-03.jpg banner-04.jpg banner-05.jpg banner-06.jpg Homepage-Slider.jpg The-Barn.jpg; do
+            curl -fLsS --connect-timeout 8 --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2018/11/$name" -o "/tmp/horse-asset-review/$name"
+          done
+          for name in barn.png barn-1.png barn-2.png; do
+            curl -fLsS --connect-timeout 8 --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2018/05/$name" -o "/tmp/horse-asset-review/$name"
+          done
+          curl -fLsS --connect-timeout 8 --max-time 20 'https://www.thehorseshepshed.co.uk/wp-content/uploads/2015/10/DSC_0420.png' -o /tmp/horse-asset-review/DSC_0420.png
+          file /tmp/horse-asset-review/* || true
+      - name: Upload reference photography for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: venue-image-review
+          path: /tmp/horse-asset-review
+          retention-days: 1
       - name: Build for Pages
         env:
           DEPLOY_GITHUB_PAGES: 'true'
