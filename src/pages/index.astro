@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/with-base.js';
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
 import ClosingCta from '../components/ClosingCta.astro';
@@ -14,12 +15,12 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
         <h1 id="h1"><span>Good food.</span> <span>Good company.</span> <em>Right at home.</em></h1>
         <p class="lede hero__lede">A welcoming pub and restaurant in Shepshed, serving thoughtfully prepared food, good drinks and the sort of hospitality that makes you want to come back.</p>
         <div class="hero__ctas">
-          <a class="btn btn--brass" href="/book/">Book a Table</a>
-          <a class="btn btn--ghost" href="/menus/">Explore Our Menus</a>
+          <a class="btn btn--brass" href={withBase('/book/')}>Book a Table</a>
+          <a class="btn btn--ghost" href={withBase('/menus/')}>Explore Our Menus</a>
         </div>
       </div>
     </div>
-      <form class="wrap quick quick--bar" action="/book/" method="get" aria-labelledby="quick-h">
+      <form class="wrap quick quick--bar" action={withBase('/book/')} method="get" aria-labelledby="quick-h">
         <h2 id="quick-h" class="quick__title">Find a table</h2>
         <div class="quick__row">
           <label>Guests
@@ -48,13 +49,13 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
        </div>
        <div>
         <p class="lede">From a relaxed midweek supper to something worth celebrating, enjoy carefully prepared dishes in surroundings that feel comfortably familiar. Quality is always at the heart of the kitchen, without the fuss.</p>
-        <div class="hero__ctas"><a class="btn btn--forest" href="/book/">Book a Table</a><a class="btn btn--ghost" href="/menus/">Explore Our Menus</a></div>
+        <div class="hero__ctas"><a class="btn btn--forest" href={withBase('/book/')}>Book a Table</a><a class="btn btn--ghost" href={withBase('/menus/')}>Explore Our Menus</a></div>
        </div>
       </div>
       <div class="cards">
-        <a class="card reveal" href="/menus/#main-menu"><Photo label="Main menu dish" tone="forest" ratio="4 / 5" /><h3>Lunch &amp; evening</h3><p>Relaxed suppers and meals worth celebrating.</p><span class="link-arrow">View the menu</span></a>
-        <a class="card reveal" href="/menus/#sunday-lunch"><Photo label="Sunday lunch" tone="clay" ratio="4 / 5" /><h3>Sunday lunch</h3><p>Gather around the table.</p><span class="link-arrow">View the menu</span></a>
-        <a class="card reveal" href="/find-us/"><Photo label="The Stables pizza oven" tone="brass" ratio="4 / 5" /><h3>The Stables</h3><p>Wood-fired pizza.</p><span class="link-arrow">Find us</span></a>
+        <a class="card reveal" href={withBase('/menus/#main-menu')}><Photo label="Main menu dish" tone="forest" ratio="4 / 5" /><h3>Lunch &amp; evening</h3><p>Relaxed suppers and meals worth celebrating.</p><span class="link-arrow">View the menu</span></a>
+        <a class="card reveal" href={withBase('/menus/#sunday-lunch')}><Photo label="Sunday lunch" tone="clay" ratio="4 / 5" /><h3>Sunday lunch</h3><p>Gather around the table.</p><span class="link-arrow">View the menu</span></a>
+        <a class="card reveal" href={withBase('/find-us/')}><Photo label="The Stables pizza oven" tone="brass" ratio="4 / 5" /><h3>The Stables</h3><p>Wood-fired pizza.</p><span class="link-arrow">Find us</span></a>
       </div>
     </div>
   </section>
@@ -89,7 +90,7 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
           <li><b>Double</b><span>4 rooms</span></li>
           <li><b>Rates &amp; availability</b><span>On enquiry</span></li>
         </ul>
-        <div class="actions"><a class="btn btn--ghost" href="/stay/">Enquire About a Room</a></div>
+        <div class="actions"><a class="btn btn--ghost" href={withBase('/stay/')}>Enquire About a Room</a></div>
       </div>
       <div class="stack reveal">
         <Photo label="Premium King bedroom" tone="clay" ratio="16 / 10" />
@@ -106,7 +107,7 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
         <p class="eyebrow">Our story</p>
         <h2 id="story-h">The people behind <em>The Horse.</em></h2>
         <p>A little about the pub, the team and the food.</p>
-        <a class="link-arrow" href="/our-story/">Read our story</a>
+        <a class="link-arrow" href={withBase('/our-story/')}>Read our story</a>
       </div>
     </div>
   </section>
@@ -117,7 +118,7 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
         <p class="eyebrow">What's on</p>
         <h2 id="on-h">Events &amp; <em>special occasions.</em></h2>
         <p>Find out what's coming up at The Horse.</p>
-        <p><a class="link-arrow" href="/whats-on/">See what's on</a></p>
+        <p><a class="link-arrow" href={withBase('/whats-on/')}>See what's on</a></p>
       </div>
       <Photo class="reveal" label="Events" tone="ivory" ratio="3 / 2" />
     </div>

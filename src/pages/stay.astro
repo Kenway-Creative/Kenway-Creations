@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/with-base.js';
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
 import ClosingCta from '../components/ClosingCta.astro';
@@ -22,7 +23,7 @@ import ClosingCta from '../components/ClosingCta.astro';
           <li><b>Rates &amp; availability</b><span>On enquiry</span></li>
         </ul>
         <p>To ask about a room, please call us on <a href="tel:+441509507006">01509 507006</a>.</p>
-        <div class="actions"><a class="btn btn--brass" href="tel:+441509507006">Call to Enquire</a><a class="btn btn--ghost" href="/find-us/">Find Us</a></div>
+        <div class="actions"><a class="btn btn--brass" href="tel:+441509507006">Call to Enquire</a><a class="btn btn--ghost" href={withBase('/find-us/')}>Find Us</a></div>
       </div>
       <div class="stack">
         <Photo label="Premium King bedroom" asset="premium-king.jpg" tone="clay" ratio="16 / 10" />

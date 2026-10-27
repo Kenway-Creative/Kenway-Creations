@@ -1,4 +1,3 @@
 import { defineConfig } from 'astro/config';
-
-// Static output: no server, no database. Deployable to any static host.
-export default defineConfig({ output: 'static', build: { inlineStylesheets: 'auto' } });
+const gh = process.env.DEPLOY_GITHUB_PAGES === 'true';
+export default defineConfig({ output: 'static', site: gh ? 'https://kenway-creative.github.io' : undefined, base: gh ? '/Kenway-Creations/' : '/', build: { inlineStylesheets: 'auto' } });
