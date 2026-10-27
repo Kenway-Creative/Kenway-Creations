@@ -13,7 +13,7 @@ const enhance = (img) => img.median(3).normalise({ lower: 2, upper: 98 }).sharpe
 const photos = [
   { name: 'hero.webp', url: base+'2018/11/Homepage-Slider.jpg', width: 1600 },
   // The original banner contains two dishes. Keep only the right-hand beetroot plate in a 4:5 portrait crop.
-  { name: 'food-main.webp', url: base+'2018/11/banner-01.jpg', crop: { left: 940, top: 40, width: 340, height: 425 }, width: 1060 },
+  { name: 'food-main.webp', url: base+'2018/11/banner-01.jpg', crop: { left: 985, top: 65, width: 295, height: 369 }, width: 1060 },
   { name: 'food-pizza.webp', url: base+'2016/03/Lloyds-first-Pizza_n.jpg', width: 960, enlarge: true, enhance: true },
   { name: 'stables-interior.webp', url: base+'2016/05/The-Stables-3.jpg', width: 1100 },
   { name: 'stables-terrace.webp', url: base+'2016/05/The-Stables-4.jpg', width: 1100 },
