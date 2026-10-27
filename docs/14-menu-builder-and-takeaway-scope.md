@@ -1,6 +1,6 @@
 # The Horse — chef menu publisher, phone takeaway and venue content
 
-**Status:** approved project direction for an **unofficial prototype**, not a live venue-approved service. The menu editor is **scoped but not built**. No e-commerce, online order acceptance, basket, checkout or payment integrations.
+**Status:** interactive **browser-only menu manager prototype built** at `/menu-manager/` on the unofficial GitHub Pages preview. It is not an authenticated or production CMS. No e-commerce, online order acceptance, basket, checkout or payment integrations.
 
 **Primary objective:** bring guests into the restaurant. Table bookings and dining-in remain the primary calls to action. Takeaway is a modest secondary option handled by phone.
 
@@ -138,4 +138,6 @@ The public **What's On** page links to the Facebook page as an interim way to ch
 
 **Already on GitHub Pages:** static homepage takeaway section, informational `/takeaway/` page with telephone link, menu PDFs, link to the venue's Facebook page on `/whats-on/`, and the existing table-booking demonstration.
 
-**Not yet implemented:** authenticated chef admin, content database/CMS, live weekly menu listings, publish webhook, deployment status, scheduled publishing or menu rollback. These must not be presented as working until actually built, tested and approved.
+**Implemented as a browser-only prototype:** a four-menu chef editor at `/menu-manager/` with sections, dishes, prices, allergen-review confirmation, availability toggles, weekly date, duplicate-for-next-week, save draft, preview, browser-local publish/unpublish and local version rollback. The `/menus/` and `/takeaway/` pages render published prototype listings **only in the same browser's localStorage**. No customer-facing remote publication occurs.
+
+**Not yet implemented:** secure chef authentication, shared content database/CMS, real production publishing/deploy webhook, cross-device live menu listings, scheduled publishing or deployment status. These must not be presented as working until actually built, tested and approved.
