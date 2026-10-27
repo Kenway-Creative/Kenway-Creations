@@ -10,7 +10,7 @@ Independent design prototype for a pitch to the owners. **Not the official websi
 - Genuine venue and owner-supplied photos used where available; poor-quality terrace photograph removed in favour of a labelled placeholder. No AI-generated venue imagery.
 - Menu page currently links **previously published PDFs**, not live weekly menu listings.
 - Takeaway is a **phone enquiry/order path**, not e-commerce: `/takeaway/` points customers to 01509 507006. No online orders or payments.
-- **Chef menu manager is a proposed next build**, not implemented. See `docs/14-menu-builder-and-takeaway-scope.md`. Its Publish action must update the website's public weekly menu listings without developer intervention.
+- **Chef menu manager browser-only prototype is built** at `/menu-manager/`: create/edit menus, sections, dishes, prices, allergens, save, preview, duplicate week, browser-local publish and rollback. Published prototype listings appear on `/menus/` and `/takeaway/` **only in the same browser**. There is no sign-in, shared database or real publication yet. See `docs/14-menu-builder-and-takeaway-scope.md` for the next production CMS milestone.
 - Venue Facebook reference for genuine imagery and event research: https://www.facebook.com/TheHorseShepshed.co.uk/ . Verify event facts and photo permissions before reuse.
 - Table-booking journey remains a demonstration; Toast Tables integration requires venue setup/approval.
 
