@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../lib/with-base.js';
 import Base from '../layouts/Base.astro';
+import '../styles/menu-manager.css';
 // Official PDF locations supplied by the project owner (GPT-verified public URLs). Linked, never copied or modified.
 const menus = [
   { id: 'main-menu', title: 'Main Menu', url: 'https://www.thehorseshepshed.co.uk/wp-content/uploads/2025/10/2025-MAIN-MENU.pdf' },
@@ -17,8 +18,11 @@ const menus = [
     </div>
   </section>
 
-  <section aria-label="Menus">
+  <section data-menu-public="restaurant" hidden aria-label="Browser-only weekly menu preview"></section>
+
+  <section aria-label="Previously published PDF menus">
     <div class="wrap">
+      <p class="eyebrow">Previously published PDFs</p>
       <ul class="menu-list">
         {menus.map(m => (
           <li class="menu-item" id={m.id}>
@@ -50,3 +54,8 @@ const menus = [
     </div>
   </section>
 </Base>
+
+<script>
+  import { initPublicMenus } from '../lib/menu-prototype.js';
+  initPublicMenus();
+</script>
