@@ -55,7 +55,7 @@ jobs:
                   unique=list(dict.fromkeys(found))
                   for value in unique[:55]: print('IMG',value[:200])
               except Exception as e: print('ERROR',str(e)[:180])
-          url='https://www.thehorseshepshed.co.uk/wp-json/wp/v2/media?per_page=30'
+          url='https://www.thehorseshepshed.co.uk/wp-json/wp/v2/media?per_page=100&media_type=image'
           try:
               import json
               x=json.load(urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=15))
