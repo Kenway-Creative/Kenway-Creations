@@ -7,4 +7,7 @@ dist
 assets-src/
 
 # Venue photography stays local until the owners grant permission
-src/assets/venue/
+# Build-generated archive photographs remain ignored; user-provided, optimised client photos may be published.
+src/assets/venue/*
+!src/assets/venue/README.md
+!src/assets/venue/client-*.webp

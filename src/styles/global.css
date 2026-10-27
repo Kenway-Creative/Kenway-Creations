@@ -322,3 +322,18 @@ address { font-style: normal; }
 .ph figcaption span { opacity: 1; }
 .hero h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
 @media (max-width: 52rem) { .hero__grid { padding-block: var(--space-6) var(--space-5); gap: var(--space-5); } }
+
+/* Genuine venue and guest-supplied food photography */
+.food-gallery { padding-top: var(--space-7); }
+.food-gallery__grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(.75rem,2vw,1.75rem); margin-top: clamp(1.5rem,4vw,3rem); }
+.food-gallery__item { min-width: 0; }
+.food-gallery__item .ph { width: 100%; }
+.food-gallery__item p { font-family: var(--ff-serif); font-size: clamp(1rem,1.6vw,1.35rem); margin: .65rem 0 0; }
+.location-images { padding-top: 0; }
+.location-images__grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem; }
+.location-images__grid .ph { width:100%; }
+@media(max-width: 40rem) {
+  .food-gallery__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .food-gallery__item:last-child { grid-column: 1 / -1; max-width: 70%; }
+  .location-images__grid { grid-template-columns: 1fr; }
+}

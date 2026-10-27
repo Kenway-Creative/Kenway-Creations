@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ClosingCta from '../components/ClosingCta.astro';
+import Photo from '../components/Photo.astro';
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('The Horse, 196 Ashby Road West, Shepshed, LE12 9EF');
 ---
 <Base title="Find us – The Horse, Shepshed (unofficial concept)" description="Address, phone and directions for The Horse, Shepshed.">
@@ -18,6 +19,13 @@ const mapUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURICom
         <div><h2 class="h3">Opening times &amp; bookings</h2><p>Please call us on <a href="tel:+441509507006">01509 507006</a> to check opening times or to ask about a room.</p></div>
       </div>
       <div class="actions"><a class="btn btn--forest" href={mapUrl} rel="noopener">Get Directions</a><a class="btn btn--ghost btn--ghost-dark" href="tel:+441509507006">Call Us</a></div>
+    </div>
+  </section>
+
+  <section aria-label="The Horse exterior" class="location-images">
+    <div class="wrap location-images__grid">
+      <Photo asset="client-sign.webp" label="The Horse pub sign" ratio="4 / 3" tone="ivory" />
+      <Photo asset="client-exterior.webp" fallbackAsset="hero.webp" fallbackAlt="The Horse exterior, archival photograph" label="Exterior of The Horse" ratio="4 / 3" tone="ivory" />
     </div>
   </section>
 

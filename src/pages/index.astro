@@ -31,7 +31,7 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
         <button class="btn btn--forest" type="submit">Find a Table</button>
         <p class="quick__note">Sample availability only. Prefer to call? <a href="tel:+441509507006">01509 507006</a></p>
       </form>
-    <Photo class="hero__photo" asset="hero.webp" priority label="Hero – exterior or dining room" tone="forest" ratio="21 / 9" />
+    <Photo class="hero__photo" asset="client-exterior.webp" fallbackAsset="hero.webp" priority label="The Horse exterior" fallbackAlt="The Horse exterior, archival photograph" tone="forest" ratio="21 / 9" />
   </section>
 
   <div class="strip-wrap">
@@ -53,9 +53,37 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
        </div>
       </div>
       <div class="cards">
-        <a class="card reveal" href={withBase('/menus/#main-menu')}><Photo asset="food-main.webp" label="Archive photograph of food served at The Horse" tone="forest" ratio="4 / 5" /><h3>Lunch &amp; evening</h3><p>Relaxed suppers and meals worth celebrating.</p><span class="link-arrow">View the menu</span></a>
-        <a class="card reveal" href={withBase('/menus/#sunday-lunch')}><Photo label="Sunday lunch" tone="clay" ratio="4 / 5" /><h3>Sunday lunch</h3><p>Gather around the table.</p><span class="link-arrow">View the menu</span></a>
+        <a class="card reveal" href={withBase('/menus/#main-menu')}><Photo asset="client-hash-1.webp" fallbackAsset="food-main.webp" label="Potato hash served at The Horse" fallbackAlt="Archive photograph of a plated dish" tone="forest" ratio="4 / 5" /><h3>Lunch &amp; evening</h3><p>Relaxed suppers and meals worth celebrating.</p><span class="link-arrow">View the menu</span></a>
+        <a class="card reveal" href={withBase('/menus/#sunday-lunch')}><Photo asset="client-roast-plate-1.webp" label="Sunday roast served at The Horse" tone="clay" ratio="4 / 5" /><h3>Sunday lunch</h3><p>Gather around the table.</p><span class="link-arrow">View the menu</span></a>
         <a class="card reveal" href={withBase('/find-us/')}><Photo asset="food-pizza.webp" label="Pizza preparation at The Stables" tone="brass" ratio="4 / 5" /><h3>The Stables</h3><p>Wood-fired pizza.</p><span class="link-arrow">Find us</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="food-gallery" aria-labelledby="gallery-h">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow">From the kitchen</p>
+          <h2 id="gallery-h">A closer look <em>at the food.</em></h2>
+        </div>
+        <div>
+          <p class="lede">A few plates photographed at The Horse. The menu changes, so please check what's being served when you visit.</p>
+        </div>
+      </div>
+      <div class="food-gallery__grid">
+        <div class="food-gallery__item reveal">
+          <Photo asset="client-katsu-1.webp" label="Pork belly katsu starter" ratio="3 / 4" tone="clay" />
+          <p>Pork belly katsu</p>
+        </div>
+        <div class="food-gallery__item reveal">
+          <Photo asset="client-hash-2.webp" label="Potato hash dish" ratio="3 / 4" tone="forest" />
+          <p>Potato hash</p>
+        </div>
+        <div class="food-gallery__item reveal">
+          <Photo asset="client-roast-board-1.webp" label="Sunday roast served on a board" ratio="3 / 4" tone="brass" />
+          <p>Sunday lunch</p>
+        </div>
       </div>
     </div>
   </section>
@@ -72,8 +100,8 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
        </div>
       </div>
       <div class="mosaic">
-        <Photo class="reveal" asset="stables-interior.webp" label="The Stables pizza kitchen" tone="forest" ratio="4 / 5" />
-        <Photo class="reveal" asset="stables-terrace.webp" label="The Stables outdoor terrace" tone="clay" ratio="4 / 3" />
+        <Photo class="reveal" asset="client-dining.webp" fallbackAsset="stables-interior.webp" label="Dining room at The Horse" fallbackAlt="Archive photograph of The Stables pizza kitchen" tone="forest" ratio="4 / 5" />
+        <Photo class="reveal" asset="client-garden.webp" fallbackAsset="stables-terrace.webp" label="Outdoor seating area at The Horse" fallbackAlt="The Stables outdoor terrace" tone="clay" ratio="4 / 3" />
         <Photo class="reveal" asset="outdoor-seating.webp" label="Outdoor tables at The Stables" tone="brass" ratio="4 / 3" />
       </div>
     </div>
@@ -102,7 +130,7 @@ const parties = [1, 2, 3, 4, 5, 6, 7, 8];
 
   <section id="story" aria-labelledby="story-h">
     <div class="wrap split">
-      <Photo class="reveal" label="Kitchen or team" tone="forest" ratio="1 / 1" />
+      <Photo class="reveal" asset="client-sign.webp" fallbackAsset="team.webp" label="The Horse hanging pub sign" fallbackAlt="Archive photograph of pizza preparation at The Horse" tone="forest" ratio="1 / 1" />
       <div class="reveal">
         <p class="eyebrow">Our story</p>
         <h2 id="story-h">The people behind <em>The Horse.</em></h2>
