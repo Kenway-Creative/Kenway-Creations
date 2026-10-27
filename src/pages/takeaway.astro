@@ -2,32 +2,33 @@
 import { withBase } from '../lib/with-base.js';
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Takeaway – The Horse, Shepshed (unofficial concept)" description="Proposed takeaway collection service for The Horse, Shepshed. Online ordering is not yet available.">
+<Base title="Takeaway – The Horse, Shepshed (unofficial concept)" description="Takeaway enquiries and telephone orders at The Horse, Shepshed. Call to check the menu and availability.">
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">For evenings at home</p>
       <h1>Something good <em>to take home.</em></h1>
-      <p class="lede">A thoughtfully chosen collection menu, built around what the kitchen can do well without taking anything away from the restaurant experience.</p>
+      <p class="lede">Staying in? Get in touch with the pub to ask what is available for takeaway.</p>
     </div>
   </section>
 
   <section aria-labelledby="takeaway-plan-h" class="takeaway-page">
     <div class="wrap takeaway-page__grid">
       <div>
-        <p class="eyebrow">Coming to this concept</p>
-        <h2 id="takeaway-plan-h">From our kitchen <em>to yours.</em></h2>
-        <p>The proposed service will show the dishes the chef has chosen for takeaway this week, with clear availability and collection times. The selection may differ from the restaurant menu.</p>
-        <p>Online ordering is not live on this prototype. No payment or order is taken here.</p>
+        <p class="eyebrow">Takeaway by telephone</p>
+        <h2 id="takeaway-plan-h">Give us <em>a call.</em></h2>
+        <p>Call to check which dishes are available to take away and to arrange collection. The takeaway selection may differ from the dine-in menu.</p>
+        <p>This unofficial website concept does not take online orders or payments. A chef-managed takeaway menu listing is planned.</p>
         <div class="actions">
-          <a class="btn btn--forest" href={withBase('/menus/')}>Explore our menus</a>
+          <a class="btn btn--forest" href="tel:+441509507006">Call 01509 507006</a>
+          <a class="link-arrow" href={withBase('/menus/')}>Explore our menus</a>
           <a class="btn btn--ghost btn--ghost-dark" href={withBase('/book/')}>Book a table</a>
         </div>
       </div>
       <aside class="takeaway-page__panel" aria-label="Takeaway service status">
-        <p class="eyebrow">Takeaway status</p>
-        <h3>Online ordering is being planned.</h3>
-        <p>Collection-only ordering, chef-controlled dishes and collection slots are proposed features, subject to approval and setup by The Horse.</p>
-        <p>To ask about any takeaway options currently offered by the pub, please contact them directly on <a href="tel:+441509507006">01509 507006</a>.</p>
+        <p class="eyebrow">Ordering information</p>
+        <h3>Order by phone.</h3>
+        <p>For takeaway availability, dishes and collection arrangements, speak directly to the team on <a href="tel:+441509507006">01509 507006</a>.</p>
+        <p>A current weekly takeaway menu will appear here once the chef menu manager has been implemented and the venue has approved its content.</p>
       </aside>
     </div>
   </section>
