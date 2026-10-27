@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/with-base.js';
+import '../styles/menu-manager.css';
+---
+<Base title="Menu Manager Prototype – The Horse, Shepshed" description="Interactive, browser-only prototype for editing weekly menus. No live publishing or customer data.">
+  <section class="mm-page">
+    <div class="wrap">
+      <div class="mm-page__head">
+        <div>
+          <p class="eyebrow">Chef's workspace · prototype</p>
+          <h1>Menu <em>manager.</em></h1>
+          <p>Create, preview and test publishing weekly restaurant and takeaway menus.</p>
+        </div>
+        <a class="btn btn--ghost btn--ghost-dark" href={withBase('/menus/')}>View customer menus</a>
+      </div>
+      <p class="mm-warning" role="note"><strong>Prototype only.</strong> There is no login or shared database yet. Menus are stored in this browser, and “Publish demo” only updates the public-style pages when viewed in this same browser. It does <strong>not</strong> publish to the real website for other visitors. Do not enter sensitive information or rely on this for customer-facing prices or allergen details.</p>
+      <div class="mm-layout" data-menu-manager data-menus-url={withBase('/menus/')} data-takeaway-url={withBase('/takeaway/')}>
+        <aside class="mm-sidebar">
+          <h2>Weekly menus</h2>
+          <nav class="mm-nav" data-mm-nav aria-label="Menu categories"></nav>
+          <p class="mm-sidebar__hint">Choose a menu, add sections and dishes, then save or preview. Publishing is a browser-only demonstration.</p>
+        </aside>
+        <div>
+          <p class="mm-notice" data-mm-notice role="status" aria-live="polite" hidden></p>
+          <div class="mm-workspace" data-mm-workspace></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<script>
+  import { initMenuManager } from '../lib/menu-manager-ui.js';
+  initMenuManager();
+</script>
