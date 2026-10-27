@@ -83,6 +83,23 @@ jobs:
             curl -fLsS --connect-timeout 8 --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2018/05/$name" -o "/tmp/horse-asset-review/$name"
           done
           curl -fLsS --connect-timeout 8 --max-time 20 'https://www.thehorseshepshed.co.uk/wp-content/uploads/2015/10/DSC_0420.png' -o /tmp/horse-asset-review/DSC_0420.png
+          curl -fLsS --max-time 20 'https://www.thehorseshepshed.co.uk/' -o /tmp/horse-asset-review/homepage.html || true
+          curl -fLsS --max-time 20 'https://www.thehorseshepshed.co.uk/the-barn-courtyard/' -o /tmp/horse-asset-review/barn-courtyard.html || true
+          for name in Rare-Fillet.png Raspberry-Vanilla-Slice.png Meet-The-Team-@-The-Horse-Shepshed.png; do
+            curl -fLsS --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2017/09/$name" -o "/tmp/horse-asset-review/$name" || true
+          done
+          for name in Duck-Breast-Slider-1.png; do
+            curl -fLsS --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2017/03/$name" -o "/tmp/horse-asset-review/$name" || true
+          done
+          for name in Woodburning-warmer.png Tempting-dishes-fresh-for-you.png; do
+            curl -fLsS --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2017/01/$name" -o "/tmp/horse-asset-review/$name" || true
+          done
+          for name in Lloyds-first-Pizza_n.jpg The-Stables@The-Horse-Shepshed.jpg; do
+            curl -fLsS --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2016/03/$name" -o "/tmp/horse-asset-review/$name" || true
+          done
+          for name in The-Stables-3.jpg The-Stables-4.jpg The-Stables-5.jpg The-Stables-6.jpg; do
+            curl -fLsS --max-time 20 "https://www.thehorseshepshed.co.uk/wp-content/uploads/2016/05/$name" -o "/tmp/horse-asset-review/$name" || true
+          done
           file /tmp/horse-asset-review/* || true
       - name: Upload reference photography for review
         uses: actions/upload-artifact@v4
