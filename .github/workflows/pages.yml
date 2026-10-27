@@ -55,14 +55,22 @@ jobs:
                   unique=list(dict.fromkeys(found))
                   for value in unique[:55]: print('IMG',value[:200])
               except Exception as e: print('ERROR',str(e)[:180])
-          url='https://www.thehorseshepshed.co.uk/wp-json/wp/v2/media?per_page=100&media_type=image'
-          try:
-              import json
-              x=json.load(urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=15))
-              if isinstance(x,list):
-                  for o in x[:30]: print('MEDIA',o.get('id'),str(o.get('alt_text',''))[:70],o.get('source_url'))
-              else: print('API not list')
-          except Exception as e: print('WP API',str(e)[:180])
+          import json
+          for page_n in range(1,5):
+              url=f'https://www.thehorseshepshed.co.uk/wp-json/wp/v2/media?per_page=100&media_type=image&page={page_n}'
+              try:
+                  x=json.load(urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=15))
+                  if isinstance(x,list):
+                      print('MEDIA PAGE',page_n,'COUNT',len(x))
+                      for o in x:
+                          url=o.get('source_url','')
+                          dims=o.get('media_details',{})
+                          title=o.get('title',{}).get('rendered','') if isinstance(o.get('title'),dict) else ''
+                          print('IMAGE_REF',o.get('id'),dims.get('width'),dims.get('height'),title[:35],url)
+                      if len(x)<100: break
+                  else: print('API not list')
+              except Exception as e:
+                  print('WP API',str(e)[:180]);break
           PY
       - name: Gather venue photographs for visual review
         run: |
