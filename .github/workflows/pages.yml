@@ -35,6 +35,7 @@ jobs:
           test -f dist/book/index.html
           test -f dist/stay/index.html
           test -f dist/takeaway/index.html
+          test -f dist/menu-manager/index.html
           grep -q '/Kenway-Creations/book/' dist/index.html
           grep -q '/Kenway-Creations/takeaway/' dist/index.html
       - uses: actions/configure-pages@v5
