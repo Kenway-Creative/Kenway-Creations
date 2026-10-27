@@ -21,6 +21,26 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Inspect official venue photo accessibility
+        run: |
+          mkdir -p /tmp/horse-photo-probe
+          for u in \
+            'https://www.thehorseshepshed.co.uk/wp-content/uploads/2018/11/banner-01.jpg' \
+            'https://www.thehorseshepshed.co.uk/wp-content/uploads/2018/11/banner-02.jpg' \
+            'https://www.thehorseshepshed.co.uk/wp-content/uploads/2015/10/DSC_0420.png'; do
+            base="$(basename "$u")"
+            echo "Checking $base"
+            curl -fLsS --connect-timeout 8 --max-time 18 -A 'Mozilla/5.0' "$u" -o "/tmp/horse-photo-probe/$base" || true
+            if [ -f "/tmp/horse-photo-probe/$base" ]; then
+              file "/tmp/horse-photo-probe/$base"
+              du -h "/tmp/horse-photo-probe/$base"
+            fi
+          done
+          curl -LsS --connect-timeout 8 --max-time 18 -A 'Mozilla/5.0' 'https://www.thehorseshepshed.co.uk/' -o /tmp/horse-photo-probe/home.html || true
+          if [ -f /tmp/horse-photo-probe/home.html ]; then
+            wc -c /tmp/horse-photo-probe/home.html
+            grep -oE 'https?[^" ]+\\.(jpg|jpeg|png|webp)' /tmp/horse-photo-probe/home.html | head -25 || true
+          fi
       - name: Build for Pages
         env:
           DEPLOY_GITHUB_PAGES: 'true'
