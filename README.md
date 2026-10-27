@@ -5,6 +5,7 @@ Independent design prototype for a pitch to the owners. **Not the official websi
 ## Current status (27 Oct 2026)
 
 - Public **unofficial** concept on GitHub Pages: https://kenway-creative.github.io/Kenway-Creations/ (noindex, not the official restaurant site).
+- **Production will NOT be hosted on GitHub Pages.** Proposed venue-owned hosting: Cloudflare Pages with Sanity CMS, subject to approval. GitHub stays as source control and proof-of-concept preview only. See `docs/15-production-hosting-and-commercials.md` for platform prices, commercial options and launch safeguards.
 - Astro site and responsive pages deployed through `.github/workflows/pages.yml`. This README does not certify any particular workflow run as successful.
 - Genuine venue and owner-supplied photos used where available; poor-quality terrace photograph removed in favour of a labelled placeholder. No AI-generated venue imagery.
 - Menu page currently links **previously published PDFs**, not live weekly menu listings.
