@@ -340,3 +340,22 @@ address { font-style: normal; }
 
 /* Hero band: keep the roofline and signage in frame when the 4:3 exterior is cropped wide */
 .hero__photo.ph--real .ph__img { object-position: 50% 30%; }
+
+
+/* Takeaway is intentionally secondary to restaurant bookings. No generated imagery. */
+.takeaway-teaser { background: var(--ivory); border-top: 1px solid #d8ccb4; border-bottom: 1px solid #d8ccb4; }
+.takeaway-teaser__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 6vw, 5rem); align-items: start; }
+.takeaway-teaser__details { border-left: 2px solid var(--clay); padding-left: clamp(1.25rem, 3vw, 2.5rem); }
+.takeaway-teaser__note { color: #605a50; font-size: .9rem; max-width: 48ch; }
+.takeaway-teaser .actions { align-items: center; gap: 1.5rem; }
+.takeaway-page__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+.takeaway-page__panel { border: 1px solid #d8ccb4; background: #fbf7ee; padding: clamp(1.5rem, 3vw, 2.5rem); }
+.takeaway-page__panel h3 { font-size: 1.65rem; }
+.takeaway-page__panel p:last-child { margin-bottom: 0; }
+@media (max-width: 52rem) {
+  .takeaway-teaser__grid, .takeaway-page__grid { grid-template-columns: 1fr; }
+  .takeaway-teaser__details { padding-left: var(--space-5); }
+}
+@media (max-width: 30rem) {
+  .takeaway-teaser .actions .btn, .takeaway-page .actions .btn { width: 100%; }
+}
