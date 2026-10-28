@@ -103,7 +103,7 @@ Editorial process:
 5. Do not auto-scrape, hotlink or automatically republish social posts; never publish expired events.
 6. Prioritise approved real photography over old archive images; **no AI-generated venue imagery**.
 
-The public **What's On** page links to the Facebook page as an interim way to check announcements. A proper event manager can be a later extension of the same CMS, but not a blocker for weekly menu publishing.
+The public **What's On** page links to the Facebook page as an interim way to check announcements. An Events Manager is now a required module of the shared Back Office for launch, though menu publishing remains the first development milestone.
 
 ## 6. Build sequence
 
@@ -124,7 +124,7 @@ The public **What's On** page links to the Facebook page as an interim way to ch
 - Publish takeaway-only listing and telephone CTA; no customer data captured.
 - Check the kitchen can honour the published selection and that changes propagate promptly.
 
-**Later (separately approved):** CMS-managed events, seasonal promotions, better photo library. No e-commerce is in the current scope.
+**Core launch requirement:** the menu manager is the first module of a unified staff Back Office, alongside photo management, events, approved page content and opening hours. See `docs/16-back-office-roadmap.md`. No e-commerce is in the current scope.
 
 ## 7. Explicit exclusions
 
