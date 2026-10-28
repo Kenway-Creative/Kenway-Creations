@@ -40,13 +40,13 @@ Do not convert USD to a fixed GBP charge or promise an ongoing free plan without
 
 ## 3. Founding client commercial arrangement — The Horse
 
-**Founder decision (27 October 2026): The Horse is the first customer and a reference account. No design, development, setup or chef menu-manager implementation fee will be charged.** The business intends to charge only a modest monthly managed-hosting fee, not a conventional agency project fee.
+**Founder decision (27 October 2026): The Horse is the first customer and a reference account. No design, development, setup, chef menu-manager or core Back Office implementation fee will be charged.** The business intends to charge only a modest monthly managed-hosting fee, not a conventional agency project fee.
 
 ### Proposed founding-client offer (not yet accepted by the venue)
 
 | Item | Price | Scope |
 |---|---:|---|
-| Design and development | **£0 one-off** | Finish the website, build the chef menu manager, implement approved public menu listings and telephone takeaway information |
+| Design and development | **£0 one-off** | Finish the website, build the chef menu manager and unified staff Back Office (photos, events, editable content, hours), implement approved public menu listings and telephone takeaway information |
 | Initial setup and launch | **£0 one-off** | Production deployment, domain migration coordination, basic chef handover |
 | Managed website hosting | **£25/month** | Website hosting oversight, deployment maintenance, basic security/dependency updates and reasonable bug fixes |
 | First-year managed hosting | **£300** | 12 × £25; no setup charge |
@@ -104,5 +104,5 @@ Before pricing is firm:
 ## 6. Decisions pending
 - Which hosting provider and CMS plan will be purchased, if any?
 - Does the venue want ownership of the code repository from day one or contractual handover on final payment?
-- Exact site scope, publication frequency, chef user count and CMS approval/scheduling requirements?
-- Whether £3,250 + £95/month is the right positioning for this particular client after discovery?
+- Exact staff Back Office scope, publication frequency, editor count, CMS media storage and approval/scheduling requirements?
+- Confirm whether the proposed founding-client hosting price covers the selected CMS/media usage. **No setup/build charge**; agree hosting pricing with the venue later.
